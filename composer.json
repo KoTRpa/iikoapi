@@ -1,11 +1,11 @@
 {
-    "name": "kotrpa/iikoapi",
+    "name": "KoTRpa/iikoapi",
     "type": "library",
     "description": "IikoBiz API",
     "keywords": [
         "Iiko", "IikoBiz"
     ],
-    "homepage": "",
+    "homepage": "https://github.com/KoTRpa/iikoapi",
     "license": "MIT",
     "authors": [
         {
@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "php": ">=7.4.*",
+        "php": ">=7.4",
         "ext-json": "*",
         "guzzlehttp/guzzle": "^6.5"
     },
