@@ -1,11 +1,11 @@
 {
-    "name": "KoTRpa/iikoapi",
+    "name": "iikoapi/iikoapi",
     "type": "library",
     "description": "IikoBiz API",
     "keywords": [
         "Iiko", "IikoBiz"
     ],
-    "homepage": "https://github.com/KoTRpa/iikoapi",
+    "homepage": "https://github.com/kotrpa/iikoapi",
     "license": "MIT",
     "authors": [
         {
