@@ -68,7 +68,7 @@ class Order extends Base
     /**
      * Признак доставки самовывозом
      */
-    public ?bool $isSelfService = null;
+    public bool $isSelfService = true;
 
     /**
      * Guid
@@ -103,7 +103,7 @@ class Order extends Base
      * Сумма заказа
      * - required
      */
-    public float $fullSum;
+    // public float $fullSum;
 
     /**
      * Маркетинговый источник (реклама).
@@ -147,16 +147,18 @@ class Order extends Base
 
     /**
      * Order constructor.
-     * @param string $date
+     * @param string $date DateTime “YYYY-MM-DD hh:mm:ss”
      * @param array $items
      * @param string $phone
      * @param float $fullSum
      */
-    public function __construct(string $date, array $items, string $phone, float $fullSum)
+    public function __construct(string $date, array $items, string $phone, float $fullSum, bool $isSelfService, Address $address)
     {
         $this->date = $date;
         $this->items = $items;
         $this->phone = $phone;
-        $this->fullSum = $fullSum;
+        // $this->fullSum = $fullSum;
+        $this->isSelfService = $isSelfService;
+        $this->address = $address;
     }
 }

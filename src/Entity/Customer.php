@@ -156,4 +156,38 @@ class Customer extends Base
         $this->name = $name;
         $this->phone = $phone;
     }
+
+    /**
+     * @param array $data
+     * @return Customer
+     */
+    public static function fromArray(array $data): Customer
+    {
+        $data = static::clear($data);
+
+        if (!isset($data['name']) || !isset($data['phone'])) {
+            throw new \InvalidArgumentException('name and phone is required');
+        }
+
+        $self = new self($data['name'], $data['phone']);
+        unset($data['name'], $data['phone']);
+
+        $data = array_filter($data, function($el) {
+            return ($el !== null);
+        });
+
+        foreach ($data as $prop => $value) {
+            switch ($prop) {
+                case 'birthday':
+                    $self->birthday = new ShortDateTime($value);
+                    break;
+                default:
+                    if (property_exists(self::class, $prop)) {
+                        $self->$prop = $value;
+                    }
+            }
+        }
+
+        return $self;
+    }
 }

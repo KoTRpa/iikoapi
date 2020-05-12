@@ -2,6 +2,8 @@
 
 namespace KMA\IikoApi\Entity;
 
+use KMA\IikoApi\Collection\OrderItemModifierCollection;
+
 class OrderItem extends Base
 {
     /**
@@ -41,9 +43,8 @@ class OrderItem extends Base
     /**
      * Модификаторы
      * OrderItemModifier[]
-     * TODO: make OrderItemModifierCollection
      */
-    public ?array $modifiers = null;
+    public ?OrderItemModifierCollection $modifiers = null;
 
     /**
      * Комментарий

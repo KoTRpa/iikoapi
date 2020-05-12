@@ -26,7 +26,7 @@ class OrderRequest extends Base
     /**
      * Заказчик
      */
-    public ?Customer $customer = null;
+    public Customer $customer;
 
     /**
      * Заказ
@@ -76,9 +76,10 @@ class OrderRequest extends Base
      * @param string $organization
      * @param Order $order
      */
-    public function __construct(string $organization, Order $order)
+    public function __construct(string $organization, Order $order, Customer $customer)
     {
         $this->organization = $organization;
         $this->order = $order;
+        $this->customer = $customer;
     }
 }
