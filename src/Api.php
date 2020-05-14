@@ -3,19 +3,20 @@
 
 namespace KMA\IikoApi;
 
-
-use KMA\IikoApi\Entity\OrderInfo;
-use KMA\IikoApi\Entity\OrderRequest;
 use KMA\IikoApi\Exceptions\IikoResponseException;
-use KMA\IikoApi\Provider\HttpProvider;
-use KMA\IikoApi\Type\TimeSpan;
+use KMA\IikoApi\Provider\RemoteProvider;
 use Psr\Http\Message\ResponseInterface;
 
 class Api
 {
-    private string $url;
-    private string $user;
-    private string $pass;
+    protected string $url;
+    protected string $user;
+    protected string $pass;
+
+    protected RemoteProvider $remote;
+    protected string $token;
+
+    protected string $organizationId;
 
     /**
      * Api constructor.
@@ -27,41 +28,20 @@ class Api
         $this->url = $config->url();
         $this->user = $config->user();
         $this->pass = $config->password();
+
+        $this->remote = new RemoteProvider();
+        $this->token = $this->token();
+
     }
 
-    public static function order()
+    public static function order(): Api\Order
     {
         return new Api\Order();
     }
 
-    public function orderAdd(OrderRequest $orderRequest, ?TimeSpan $timeout = null): OrderInfo
+    public static function organization(): Api\Organization
     {
-        $token = $this->token();
-
-        $http = new HttpProvider();
-
-        $url = $this->url . '/orders/add?access_token=' . $token;
-
-        if ($timeout) {
-            $url .= '&' . (string)$timeout;
-        }
-
-        $data = ['body' => \GuzzleHttp\json_encode($orderRequest, JSON_UNESCAPED_UNICODE)];
-
-        /** @var \Psr\Http\Message\ResponseInterface $response */
-        $response = $http->post($url, $data);
-
-        $statusCode = $response->getStatusCode();
-
-        /* guzzle json_decode thrown an exception on decode error */
-        $body = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
-
-        if ($statusCode >= 400 || empty($body)) {
-            // on code over 400 iiko returns in body error json
-            throw new IikoResponseException($body);
-        }
-
-        return OrderInfo::fromArray($body);
+        return new Api\Organization();
     }
 
     /**
@@ -70,12 +50,10 @@ class Api
      */
     protected function token(): string
     {
-        $http = new HttpProvider();
-
         $url = $this->url . '/auth/access_token';
         $query = ['user_id' => $this->user, 'user_secret' => $this->pass];
 
-        $response = $http->get($url, $query);
+        $response = $this->remote->get($url, $query);
 
         return $this->fetch($response);
 
@@ -83,10 +61,10 @@ class Api
 
     /**
      * @param ResponseInterface $response
-     * @return string
+     * @return string|array
      * @throws IikoResponseException
      */
-    protected function fetch(ResponseInterface $response): string
+    protected function fetch(ResponseInterface $response)
     {
         $statusCode = $response->getStatusCode();
 
@@ -108,6 +86,6 @@ class Api
             throw new IikoResponseException($error);
         }
 
-        return $body;
+        return \GuzzleHttp\json_decode($body);
     }
 }

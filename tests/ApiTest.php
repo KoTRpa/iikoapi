@@ -22,4 +22,12 @@ class ApiTest extends TestCase
             Api::order()
         );
     }
+
+    public function testOrganizationInstanceGet(): void
+    {
+        $this->assertInstanceOf(
+            Api\Organization::class,
+            Api::organization()
+        );
+    }
 }

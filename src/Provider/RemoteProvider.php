@@ -5,7 +5,7 @@ namespace KMA\IikoApi\Provider;
 
 use GuzzleHttp\Client;
 
-class HttpProvider
+class RemoteProvider
 {
     private Client $client;
 
