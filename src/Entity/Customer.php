@@ -4,16 +4,25 @@ namespace KMA\IikoApi\Entity;
 
 use KMA\IikoApi\Type\ShortDateTime;
 
+/**
+ * Class Customer
+ * @package KMA\IikoApi\Entity
+ * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.yzwu6ehu8367
+ *
+ * Required fields
+ * - $name
+ * - $phone
+ */
 class Customer extends Base
 {
     /**
-     * Идентификатор
+     * @var string|null Идентификатор
      * Guid
      */
     public ?string $id = null;
 
     /**
-     * Имя
+     * @var string Имя
      *
      * Валидация:
      *  - maxlength 60
@@ -22,7 +31,7 @@ class Customer extends Base
     public string $name;
 
     /**
-     * Телефонный номер
+     * @var string Телефонный номер
      *
      * Валидация:
      * - regexp ^(8|\+?\d{1,3})?[ -]?\(?(\d{3})\)?[ -]?(\d{3})[ -]?(\d{2})[ -]?(\d{2})$
@@ -32,21 +41,21 @@ class Customer extends Base
     public string $phone;
 
     /**
-     * Языковая культура пользователя,
+     * @var string|null Языковая культура пользователя,
      * пример: RU-ru
      */
     public ?string $cultureName = null;
 
     /**
-     * Любимое блюдо пользователя
+     * @var string|null Любимое блюдо пользователя
      */
     public ?string $favouriteDish = null;
 
-    /** День рождения */
+    /** @var ShortDateTime|null День рождения */
     public ?ShortDateTime $birthday = null;
 
     /**
-     * email
+     * @var string|null email
      *
      * Валидация:
      *  - email
@@ -55,7 +64,7 @@ class Customer extends Base
     public ?string $email = null;
 
     /**
-     * Никнэйм
+     * @var string|null Никнэйм
      *
      * Валидация:
      *  - maxlength 60
@@ -63,7 +72,7 @@ class Customer extends Base
     public ?string $nick = null;
 
     /**
-     * Отчество
+     * @var string|null Отчество
      *
      * Валидация:
      *  - maxlength 60
@@ -71,7 +80,7 @@ class Customer extends Base
     public ?string $middleName = null;
 
     /**
-     * Фамилия
+     * @var string|null Фамилия
      *
      * Валидация:
      *  - maxlength 60
@@ -79,12 +88,12 @@ class Customer extends Base
     public ?string $surName = null;
 
     /**
-     * Получает ли пользователь информацию о промо акциях
+     * @var bool|null Получает ли пользователь информацию о промо акциях
      */
     public ?bool $shouldReceivePromoActionsInfo = null;
 
     /**
-     * Пол:
+     * @var string|null Пол:
      * NotSpecified = 0,
      * Male = 1,
      * Female = 2.
@@ -97,35 +106,35 @@ class Customer extends Base
 
     /**
      * Guid
-     * Идентификатор изображения пользователя
+     * @var string|null Идентификатор изображения пользователя
      */
     public ?string $imageId = null;
 
     /**
      * {“Key”:””,”Value”:””}[]
-     * массив key-value значений дополнительных свойств
+     * @var array|null массив key-value значений дополнительных свойств
      * TODO: make PropertyCollection Type
      */
     public ?array $customProperties = null;
 
     /**
      * {“Key”:””,”Value”:””}[]
-     * массив key-value значений публичных дополнительных свойств
+     * @var array|null массив key-value значений публичных дополнительных свойств
      * TODO: make PropertyCollection Type
      */
     public ?array $publicCustomProperties = null;
 
-    /** Баланс пользователя */
+    /** @var float|null Баланс пользователя */
     public ?float $balance = null;
 
     /**
-     * Заблокирован ли пользователь в организации
+     * @var bool|null Заблокирован ли пользователь в организации
      */
     public ?bool $isBlocked = null;
 
     /**
      * CustomerPhone[]
-     * Дополнительные телефоны
+     * @var array|null Дополнительные телефоны
      * TODO: CustomerPhone Type
      * {"phone": "123"}
      */
@@ -133,61 +142,15 @@ class Customer extends Base
 
     /**
      * CustomerAddress[]
-     * Адреса
+     * @var array|null Адреса
      * TODO: CustomerAddress Type
      */
     public ?array $addresses = null;
 
     /**
      * GuestCardInfo[]
-     * Карты
+     * @var array|null Карты
      * TODO: GuestCardInfo Type
      */
     public ?array $cards = null;
-
-
-    /**
-     * Customer constructor.
-     * @param string $name
-     * @param string $phone
-     */
-    public function __construct(string $name, string $phone)
-    {
-        $this->name = $name;
-        $this->phone = $phone;
-    }
-
-    /**
-     * @param array $data
-     * @return Customer
-     */
-    public static function fromArray(array $data): Customer
-    {
-        $data = static::clear($data);
-
-        if (!isset($data['name']) || !isset($data['phone'])) {
-            throw new \InvalidArgumentException('name and phone is required');
-        }
-
-        $self = new self($data['name'], $data['phone']);
-        unset($data['name'], $data['phone']);
-
-        $data = array_filter($data, function($el) {
-            return ($el !== null);
-        });
-
-        foreach ($data as $prop => $value) {
-            switch ($prop) {
-                case 'birthday':
-                    $self->birthday = new ShortDateTime($value);
-                    break;
-                default:
-                    if (property_exists(self::class, $prop)) {
-                        $self->$prop = $value;
-                    }
-            }
-        }
-
-        return $self;
-    }
 }

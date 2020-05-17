@@ -8,49 +8,49 @@ class OrderInfo extends Base
 {
 
     /**
-     * Guid Идентификатор заказа
+     * @var string Guid Идентификатор заказа
      */
     public string $orderId;
 
     /**
-     * Guid Идентификатор заказчика
+     * @var string|null Guid Идентификатор заказчика
      */
     public ?string $customerId = null;
 
     /**
-     * Клиент доставки
+     * @var Customer|null Клиент доставки
      */
     public ?Customer $customer = null;
 
     /**
-     * Адрес доставки
+     * @var Address|null Адрес доставки
      */
     public ?Address $address = null;
 
     /**
-     * Guid Идентификатор ресторана
+     * @var string|null Guid Идентификатор ресторана
      */
     public ?string $organization = null;
 
     /**
-     * Сумма заказа
+     * @var float|null Сумма заказа
      */
     public ?float $sum = null;
 
     /**
-     * Сумма скидки
+     * @var float|null Сумма скидки
      */
     public ?float $discount = null;
 
     /**
-     * Понятный номер заказа
+     * @var string|null Понятный номер заказа
      * Может использоваться для передачи клиенту
      * Уникальность не гарантирована (может быть уникальным в рамках одного обслуживающего сервера)
      */
     public ?string $number = null;
 
     /**
-     * Статус заказа.
+     * @var string|null Статус заказа.
      * Варианты значения для доставки (для русской и английской локализации iikoRMS):
      * Русский         | English
      * ------------------------------------
@@ -67,7 +67,7 @@ class OrderInfo extends Base
     public ?string $status = null;
 
     /**
-     * Имя клиента
+     * @var string|null Имя клиента
      */
     public ?string $customerName = null;
 
@@ -90,46 +90,4 @@ class OrderInfo extends Base
      * Координаты адреса доставочного заказа
      */
     // public ?CoordinatesInfo $orderLocationInfo = null;
-
-    /**
-     * OrderInfo constructor.
-     * @param string $orderId
-     */
-    public function __construct(string $orderId)
-    {
-        $this->orderId = $orderId;
-    }
-
-    /**
-     * @param array $data
-     * @return OrderInfo
-     */
-    public static function fromArray(array $data): OrderInfo
-    {
-        $data = static::clear($data);
-
-        if (!isset($data['orderId'])) {
-            throw new \InvalidArgumentException('orderId is undefined');
-        }
-
-        $self = new self($data['orderId']);
-        unset($data['orderId']);
-
-        foreach ($data as $prop => $value) {
-            switch ($prop) {
-                case 'customer':
-                    $self->customer = Customer::fromArray($value);
-                    break;
-                case 'address':
-                    $self->address = Address::fromArray($value);
-                    break;
-                default:
-                    if (property_exists(self::class, $prop)) {
-                        $self->$prop = $value;
-                    }
-            }
-        }
-
-        return $self;
-    }
 }

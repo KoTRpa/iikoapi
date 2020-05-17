@@ -3,12 +3,11 @@
 
 namespace KMA\IikoApi\Api;
 
-
-use JsonMapper;
+use KMA\IikoApi\Api;
 use KMA\IikoApi\Entity\OrganizationInfo;
 use KMA\IikoApi\Exceptions\IikoResponseException;
 
-class Organization extends \KMA\IikoApi\Api
+class Organization extends Api
 {
     /**
      * @return OrganizationInfo[]
@@ -22,14 +21,8 @@ class Organization extends \KMA\IikoApi\Api
 
         $response = $this->remote->get($url, $query);
 
-        $org = $this->fetch($response);
-
-        $mapper = new JsonMapper();
-
-        $result = $mapper->mapArray(
-            $org, [], OrganizationInfo::class
+        return $this->mapper->mapArray(
+            $response, [], OrganizationInfo::class
         );
-
-        return $result;
     }
 }

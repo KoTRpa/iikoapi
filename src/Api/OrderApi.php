@@ -8,25 +8,25 @@ use KMA\IikoApi\Api;
 use KMA\IikoApi\Entity\OrderInfo;
 use KMA\IikoApi\Entity\OrderRequest;
 use KMA\IikoApi\Exceptions\IikoResponseException;
+use KMA\IikoApi\Type\TimeSpan;
 
 class Order extends Api
 {
-
-    public function add(OrderRequest $orderRequest)
+    public function add(OrderRequest $orderRequest, ?TimeSpan $timeout = null): OrderInfo
     {
-        $uri = '/orders/add?access_token={accessToken}&request_timeout={requestTimeout}';
-        $token = $this->token();
+        $url = $this->url . '/orders/add';
 
-        $url = $this->url . '/orders/add?access_token=' . $token;
-
-        if ($timeout) {
-            $url .= '&' . (string)$timeout;
+        if (null === $timeout) {
+            $timeout = new TimeSpan(0, 1, 0);
         }
 
-        $data = ['body' => \GuzzleHttp\json_encode($orderRequest, JSON_UNESCAPED_UNICODE)];
+        $query = [
+            'access_token' => $this->token,
+            'requestTimeout' => (string)$timeout,
+            'body' => \GuzzleHttp\json_encode($orderRequest, JSON_UNESCAPED_UNICODE)
+        ];
 
-        /** @var \Psr\Http\Message\ResponseInterface $response */
-        $response = $this->remote->post($url, $data);
+        $response = $this->remote->post($url, $query);
 
         $statusCode = $response->getStatusCode();
 

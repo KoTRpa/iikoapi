@@ -3,6 +3,11 @@
  * Class OrderRequest
  * @package KMA\IikoApi\Entity
  * @url https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.vw4ejhcm2zu9\
+ *
+ * Required fields:
+ * - $organization
+ * - $order
+ * - $customer
  */
 
 namespace KMA\IikoApi\Entity;
@@ -10,44 +15,41 @@ namespace KMA\IikoApi\Entity;
 class OrderRequest extends Base
 {
     /**
-     * Идентификатор ресторана.
+     * @var string Идентификатор ресторана.
      * Список доступных ресторанов можно получить при помощи функции "Получение списка организаций"
      */
     public string $organization;
 
     /**
-     * Guid
-     * Идентификатор доставочного термина, на который нужно отправить заказ.
+     * @var string|null Guid Идентификатор доставочного термина, на который нужно отправить заказ.
      * Используется ТОЛЬКО в том случае когда не активирована функция автораспределния заказов
      * и когда нет (физически) операторов коллцентра, которые могут обработать заказ.
      */
     public ?string $deliveryTerminalId = null;
 
     /**
-     * Заказчик
+     * @var Customer Заказчик
      */
     public Customer $customer;
 
     /**
-     * Заказ
+     * @var Order Заказ
      */
     public Order $order;
 
     /**
-     * Номер купона, который применяется к заказу
+     * @var string|null Номер купона, который применяется к заказу
      */
     public ?string $coupon = null;
 
     /**
-     * Guid[]
-     * Массив идентификаторов применяемых акций, содержащих Действия оплаты.
+     * @var array|null Guid[] Массив идентификаторов применяемых акций, содержащих Действия оплаты.
      * Если действия оплаты не используются, то массив должен быть пустым.
      */
     public ?array $availablePaymentMarketingCampaignIds = null;
 
     /**
-     * Guid[]
-     * Массив идентификаторов ручных условий, которые применяются к заказу.
+     * @var array|null Guid[] Массив идентификаторов ручных условий, которые применяются к заказу.
      * !!! Примечание:
      * Для версии РМС более ранней чем  6.2, ручные условия можно применить для CalculateCheckinResult,
      * но при создании заказа они работать не будут.
@@ -56,30 +58,37 @@ class OrderRequest extends Base
     public ?array $applicableManualConditions = null;
 
     /**
-     * Служебная информация. Только хранится, доступна через API, на UI не выводится
+     * @var string|null Служебная информация. Только хранится, доступна через API, на UI не выводится
      */
     public ?string $customData = null;
 
     /**
-     * Email для отправки информации о заказе при проблемах с созданием.
+     * @var string|null Email для отправки информации о заказе при проблемах с созданием.
      */
     public ?string $emailForFailedOrderInfo = null;
 
     /**
-     * Идентификатор рекомендателя (customer.id) из iikoCard.
+     * @var string|null Идентификатор рекомендателя (customer.id) из iikoCard.
      * Получить можно из iikoCardAPI методами "get_customer_by_phone" или "get_customer_by_card"
      */
     public ?string $referrerId = null;
 
     /**
-     * OrderRequest constructor.
-     * @param string $organization
-     * @param Order $order
+     * TODO: make required props validation universal
+     * @throws \InvalidArgumentException
      */
-    public function __construct(string $organization, Order $order, Customer $customer)
+    public function validate()
     {
-        $this->organization = $organization;
-        $this->order = $order;
-        $this->customer = $customer;
+        if (!$this->organization) {
+            throw new \InvalidArgumentException('Отсутствует идентификатор организации');
+        }
+
+        if (!$this->customer) {
+            throw new \InvalidArgumentException('Отсутствует информация о покупателе');
+        }
+
+        if (!$this->order) {
+            throw new \InvalidArgumentException('Отсутствует информация о заказе');
+        }
     }
 }

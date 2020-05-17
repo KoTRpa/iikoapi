@@ -7,48 +7,32 @@ namespace KMA\IikoApi\Entity;
 class OrderItemModifier extends Base
 {
     /**
-     * Guid Идентификатор продукта
+     * @var string Guid Идентификатор продукта
      *  - required
      */
     public string $id;
 
     /**
-     * Название продукта
+     * @var string Название продукта
      *  - required
      */
     public string $name;
 
     /**
-     * Количество
+     * @var float Количество
      *  - required
      */
     public float $amount;
 
     /**
-     * Guid Идентификатор группы в случае группового модификатора.
+     * @var string|null Guid Идентификатор группы в случае группового модификатора.
      * Обязателен если модификатор является групповым.
      */
     public ?string $groupId = null;
 
     /**
-     * Имя группы в случае группового модификатора.
+     * @var string|null Имя группы в случае группового модификатора.
      * Обязателен если модификатор является групповым.
      */
     public ?string $groupName = null;
-
-
-    /**
-     * OrderItemModifier constructor.
-     * @param string $id
-     * @param string $name
-     * @param float $amount
-     */
-    public function __construct(string $id, string $name, float $amount)
-    {
-        $this->id = $id;
-        $this->name = $name;
-        $this->amount = $amount;
-    }
-
-    // TODO: Check Group modifier
 }
