@@ -4,17 +4,18 @@
 namespace KMA\IikoApi\Api;
 
 use KMA\IikoApi\Api;
+use KMA\IikoApi\Entity\Nomenclature;
 use KMA\IikoApi\Exceptions\IikoResponseException;
 
-class Nomenclature extends Api
+class NomenclatureApi extends Api
 {
     /**
      * @param string $organisationId
-     * @return \KMA\IikoApi\Entity\Nomenclature
+     * @return Nomenclature
      * @throws \JsonMapper_Exception
      * @throws IikoResponseException
      */
-    public function get(string $organisationId): \KMA\IikoApi\Entity\Nomenclature
+    public function get(string $organisationId): Nomenclature
     {
         $url = $this->url . '/nomenclature/' . $organisationId;
 
@@ -27,7 +28,7 @@ class Nomenclature extends Api
         $response = $this->remote->get($url, $query);
 
         return $this->mapper->map(
-            $response, new \KMA\IikoApi\Entity\Nomenclature()
+            $response, new Nomenclature()
         );
     }
 }

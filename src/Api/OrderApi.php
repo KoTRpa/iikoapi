@@ -10,34 +10,29 @@ use KMA\IikoApi\Entity\OrderRequest;
 use KMA\IikoApi\Exceptions\IikoResponseException;
 use KMA\IikoApi\Type\TimeSpan;
 
-class Order extends Api
+class OrderApi extends Api
 {
+    /**
+     * @param OrderRequest $orderRequest
+     * @param TimeSpan|null $timeout
+     * @return OrderInfo
+     * @throws IikoResponseException
+     * @throws \JsonMapper_Exception
+     */
     public function add(OrderRequest $orderRequest, ?TimeSpan $timeout = null): OrderInfo
     {
-        $url = $this->url . '/orders/add';
-
         if (null === $timeout) {
             $timeout = new TimeSpan(0, 1, 0);
         }
 
+        $url = $this->url . '/orders/add?access_token=' . $this->token . '&requestTimeout=' . (string)$timeout;
+
         $query = [
-            'access_token' => $this->token,
-            'requestTimeout' => (string)$timeout,
             'body' => \GuzzleHttp\json_encode($orderRequest, JSON_UNESCAPED_UNICODE)
         ];
 
         $response = $this->remote->post($url, $query);
 
-        $statusCode = $response->getStatusCode();
-
-        /* guzzle json_decode thrown an exception on decode error */
-        $body = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
-
-        if ($statusCode >= 400 || empty($body)) {
-            // on code over 400 iiko returns in body error json
-            throw new IikoResponseException($body);
-        }
-
-        return OrderInfo::fromArray($body);
+        return $this->mapper->map($response, new OrderInfo());
     }
 }

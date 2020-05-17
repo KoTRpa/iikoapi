@@ -15,19 +15,27 @@ class ApiTest extends TestCase
         Config::init(new DemoConfigProvider());
     }
 
-    public function testOrderInstanceGet(): void
-    {
-        $this->assertInstanceOf(
-            Api\Order::class,
-            Api::order()
-        );
-    }
-
     public function testOrganizationInstanceGet(): void
     {
         $this->assertInstanceOf(
-            Api\Organization::class,
+            Api\OrganizationApi::class,
             Api::organization()
+        );
+    }
+
+    public function testNomenclatureInstanceGet(): void
+    {
+        $this->assertInstanceOf(
+            Api\NomenclatureApi::class,
+            Api::nomenclature()
+        );
+    }
+
+    public function testOrderInstanceGet(): void
+    {
+        $this->assertInstanceOf(
+            Api\OrderApi::class,
+            Api::order()
         );
     }
 }

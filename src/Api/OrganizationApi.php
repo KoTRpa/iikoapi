@@ -7,7 +7,7 @@ use KMA\IikoApi\Api;
 use KMA\IikoApi\Entity\OrganizationInfo;
 use KMA\IikoApi\Exceptions\IikoResponseException;
 
-class Organization extends Api
+class OrganizationApi extends Api
 {
     /**
      * @return OrganizationInfo[]

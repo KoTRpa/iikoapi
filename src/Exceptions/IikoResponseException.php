@@ -24,18 +24,26 @@ class IikoResponseException extends \Exception
         $this->src = $src;
 
         if (is_array($this->src)) {
+            /*
+             * камень в дупло разработчикав айки,
+             * которые не могут привести формат ошибок к единому виду
+             */
+            if (isset($this->src['Message'])) {
+                $this->src['message'] = $this->src['Message'];
+            }
+
             $message = $this->src['message'];
 
             // few codes has description on official doc
             // https://docs.google.com/document/d/1kuhs94UV_0oUkI2CI3uOsNo_dydmh9Q0MFoDWmhzwxc/edit#heading=h.4mg21qeyybfo
-            $code = $this->src['code'];
+            $code = $this->src['code'] ?? 0;
 
 
             $this->description = $this->src['description'] ?? null;
             $this->httpStatusCode = $this->src['httpStatusCode'] ?? null;
             $this->uiMessage = $this->src['uiMessage'] ?? null;
 
-            switch ($this->src['httpStatusCode']) {
+            switch ($this->httpStatusCode) {
                 case 400:
                     $this->httpStatusDesc = 'Ошибка в параметрах запроса';
                     break;
