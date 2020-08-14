@@ -1,7 +1,7 @@
 <?php
 
 
-namespace KMA\IikoApi\Provider;
+namespace KMA\IikoApi\Config;
 
 
 use KMA\IikoApi\IConfig;

@@ -3,7 +3,6 @@
 
 namespace KMA\IikoApi\Api;
 
-use KMA\IikoApi\Api;
 use KMA\IikoApi\Entity\Nomenclature;
 use KMA\IikoApi\Exceptions\IikoResponseException;
 

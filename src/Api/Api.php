@@ -1,11 +1,11 @@
 <?php
 
 
-namespace KMA\IikoApi;
+namespace KMA\IikoApi\Api;
 
 use KMA\IikoApi\Exceptions\IikoResponseException;
 use KMA\IikoApi\Exceptions\NotSetConfigProviderException;
-use KMA\IikoApi\Provider\RemoteProvider;
+use KMA\IikoApi\Config\RemoteProvider;
 
 class Api
 {
@@ -25,7 +25,7 @@ class Api
      * @throws NotSetConfigProviderException
      * @throws IikoResponseException
      */
-    public function __construct()
+    public function __construct($async = false, $httpClientHandler = null)
     {
         $config = Config::provider();
         $this->url = $config->url();

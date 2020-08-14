@@ -3,12 +3,10 @@
 
 namespace KMA\IikoApi\Api;
 
-
-use KMA\IikoApi\Api;
 use KMA\IikoApi\Entity\OrderInfo;
 use KMA\IikoApi\Entity\OrderRequest;
 use KMA\IikoApi\Exceptions\IikoResponseException;
-use KMA\IikoApi\Type\TimeSpan;
+use KMA\IikoApi\Entity\Type\TimeSpan;
 
 class OrderApi extends Api
 {
