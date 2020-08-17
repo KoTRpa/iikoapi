@@ -1,7 +1,7 @@
 <?php
 
 
-namespace KMA\IikoApi\Type;
+namespace KMA\IikoApi\Entity\Type;
 
 
 class TimeSpan

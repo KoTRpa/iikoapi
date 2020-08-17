@@ -1,6 +1,6 @@
 <?php
 
-namespace KMA\IikoApi\Type;
+namespace KMA\IikoApi\Entity\Type;
 
 /* TODO: validate guid */
 final class Guid

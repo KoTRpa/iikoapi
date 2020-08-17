@@ -1,6 +1,6 @@
 <?php
 
-namespace KMA\IikoApi\Type;
+namespace KMA\IikoApi\Entity\Type;
 
 /* TODO: validation and create from several sources */
 class ShortDateTime
