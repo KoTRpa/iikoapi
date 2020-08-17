@@ -4,94 +4,151 @@
 namespace KMA\IikoApi\Exceptions;
 
 
-use Throwable;
+use KMA\IikoApi\IikoResponse;
 
-class IikoResponseException extends \Exception
+// @TODO: getters for $innerHttpStatusCode, $innerHttpStatusDesc, $uiMessage
+class IikoResponseException extends IikoApiException
 {
-    protected $src;
-    protected $description = null;
-    protected $httpStatusCode = null;
-    protected $httpStatusDesc = null;
-    protected $uiMessage = null;
 
-    public function __construct($src)
+    /** @var IikoResponse The response that threw the exception. */
+    protected IikoResponse $response;
+
+    /** @var array Decoded response. */
+    protected array $responseData;
+
+    /** @var string|null description for error from API */
+    protected ?string $description = null;
+
+    /** @var int|null httpCode from API body (not response header) */
+    protected ?int $innerHttpStatusCode = null;
+
+    /** @var string|null Description for httpCode from body */
+    protected ?string $innerHttpStatusDesc = null;
+
+    /** @var string|null optional ui message from iiko */
+    protected ?string $uiMessage = null;
+
+    /**
+     * @param IikoResponse     $response          The response that threw the exception.
+     * @param IikoApiException $previousException The more detailed exception.
+     */
+    public function __construct(IikoResponse $response, IikoApiException $previousException = null)
     {
-        // TODO: from array and object
+        $this->response = $response;
+        $this->responseData = $response->getDecodedBody();
 
-        $message = 'Неизвестная ошибка';
-        $code = 0;
+        $this->innerHttpStatusCode = $this->responseData['httpStatusCode'] ?? null;
 
-        $this->src = $src;
-
-        if (is_array($this->src)) {
-            /*
-             * камень в дупло разработчикав айки,
-             * которые не могут привести формат ошибок к единому виду
-             */
-            if (isset($this->src['Message'])) {
-                $this->src['message'] = $this->src['Message'];
-            }
-
-            $message = $this->src['message'];
-
-            // few codes has description on official doc
-            // https://docs.google.com/document/d/1kuhs94UV_0oUkI2CI3uOsNo_dydmh9Q0MFoDWmhzwxc/edit#heading=h.4mg21qeyybfo
-            $code = $this->src['code'] ?? 0;
-
-
-            $this->description = $this->src['description'] ?? null;
-            $this->httpStatusCode = $this->src['httpStatusCode'] ?? null;
-            $this->uiMessage = $this->src['uiMessage'] ?? null;
-
-            switch ($this->httpStatusCode) {
-                case 400:
-                    $this->httpStatusDesc = 'Ошибка в параметрах запроса';
-                    break;
-                case 401:
-                    $this->httpStatusDesc = 'Ошибка авторизации';
-                    break;
-                case 403:
-                    $this->httpStatusDesc = 'Запрошенная информация недоступна с указанными данными авторизации';
-                    break;
-                case 404:
-                    $this->httpStatusDesc = 'Указанный URI или ресурс не существует';
-                    break;
-                case 408:
-                    $this->httpStatusDesc = 'Время ожидания для выполнения запроса истекло';
-                    break;
-                case 500:
-                    $this->httpStatusDesc = 'Внутренняя ошибка сервера';
-                    break;
-                default:
-                    $this->httpStatusDesc = 'Неизвестная ошибка';
-            }
+        if ($this->innerHttpStatusCode) {
+            $this->innerHttpStatusDesc = $this->getInnerHttpStatusDesc();
         }
 
-        parent::__construct($message, $code);
+        $this->uiMessage = $this->responseData['uiMessage'] ?? null;
+        $this->description = $this->responseData['description'] ?? null;
+
+        $errorMessage = $this->getResponseErrorMessage();
+        $errorCode = $this->getResponseErrorCode();
+
+        parent::__construct($errorMessage, $errorCode, $previousException);
     }
 
-    public function getSrc()
+    /**
+     * Returns the HTTP status code.
+     *
+     * @return int
+     */
+    public function getHttpStatusCode()
     {
-        return $this->src;
+        return $this->response->getHttpStatusCode();
     }
 
-    public function getDescription()
+    /**
+     * Returns the raw response used to create the exception.
+     *
+     * @return string
+     */
+    public function getRawResponse(): string
     {
-        return $this->description;
+        return $this->response->getBody();
     }
 
-    public function httpStatusCode()
+    /**
+     * Returns the decoded response used to create the exception.
+     *
+     * @return array
+     */
+    public function getResponseData(): array
     {
-        return $this->httpStatusCode;
+        return $this->responseData;
     }
 
-    public function httpStatusDesc()
+    /**
+     * Returns the response entity used to create the exception.
+     *
+     * @return IikoResponse
+     */
+    public function getResponse(): IikoResponse
     {
-        return $this->httpStatusDesc;
+        return $this->response;
     }
 
-    public function uiMessage()
+
+    /**
+     * Try to extract error message from responseData
+     *
+     * камень в дупло разработчикав айки,
+     * которые не могут привести формат ошибок к единому виду
+     *
+     * @return string
+     */
+    protected function getResponseErrorMessage(): string
     {
-        return $this->uiMessage;
+        return $this->responseData['Message'] ?? ($this->responseData['message'] ?? 'Unknown API error');
+    }
+
+    /**
+     * Try to extract error code from response
+     * default or unknown returns -1
+     *
+     * some of codes has described in official doc
+     * https://docs.google.com/document/d/1kuhs94UV_0oUkI2CI3uOsNo_dydmh9Q0MFoDWmhzwxc/edit#heading=h.4mg21qeyybfo
+     *
+     * @return int
+     */
+    protected function getResponseErrorCode(): int
+    {
+        return $this->src['code'] ?? -1;
+    }
+
+    /**
+     * IikoHttpStatus descriptions from doc
+     * https://docs.google.com/document/d/1kuhs94UV_0oUkI2CI3uOsNo_dydmh9Q0MFoDWmhzwxc/edit#heading=h.4mg21qeyybfo
+     *
+     * @return string
+     */
+    protected function getInnerHttpStatusDesc(): string
+    {
+        switch ($this->innerHttpStatusCode) {
+            case 400:
+                return 'Ошибка в параметрах запроса';
+                break;
+            case 401:
+                return 'Ошибка авторизации';
+                break;
+            case 403:
+                return 'Запрошенная информация недоступна с указанными данными авторизации';
+                break;
+            case 404:
+                return 'Указанный URI или ресурс не существует';
+                break;
+            case 408:
+                return 'Время ожидания для выполнения запроса истекло';
+                break;
+            case 500:
+                return 'Внутренняя ошибка сервера';
+                break;
+            default:
+                return 'Неизвестная ошибка';
+        }
     }
 }
