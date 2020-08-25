@@ -25,6 +25,16 @@
         "phpunit/phpunit": "^9.1",
         "psr/log": "^1.1"
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "KMA\\IikoApi\\IikoServiceProvider"
+            ],
+            "aliases": {
+                "Iiko": "KMA\\IikoApi\\Facades\\IikoFacade"
+            }
+        }
+    },
     "suggest": {
         "psr/log": "Required for using the Log middleware"
     },
