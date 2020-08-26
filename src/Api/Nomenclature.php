@@ -34,7 +34,7 @@ trait Nomenclature
         ];
 
         $response = $this->get($endpoint, $params);
-        // $json = json_decode($response->getBody(), true);
+
         return (new JsonMapper())->mapArray(
             $response->getDecodedBody(), new Entity()
         );
