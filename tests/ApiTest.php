@@ -2,40 +2,29 @@
 
 namespace KMA\IikoApi\Tests;
 
-use KMA\IikoApi\Config;
-use KMA\IikoApi\Provider\DemoConfigProvider;
+
 use PHPUnit\Framework\TestCase;
 
-use KMA\IikoApi\Api;
+use KMA\IikoApi\Iiko;
 
 class ApiTest extends TestCase
 {
+    protected $iiko;
+    protected $orgId = 'e464c693-4a57-11e5-80c1-d8d385655247';
+
     protected function setUp(): void
     {
-        Config::init(new DemoConfigProvider());
+        $config = require(__DIR__ . '/../config/iiko.php');
+        $this->iiko = new Iiko($config);
     }
 
-    public function testOrganizationInstanceGet(): void
+    public function testNomenclature(): void
     {
+        // orgId for test server
+        $orgId = 'e464c693-4a57-11e5-80c1-d8d385655247';
         $this->assertInstanceOf(
-            Api\OrganizationApi::class,
-            Api::organization()
-        );
-    }
-
-    public function testNomenclatureInstanceGet(): void
-    {
-        $this->assertInstanceOf(
-            Api\NomenclatureApi::class,
-            Api::nomenclature()
-        );
-    }
-
-    public function testOrderInstanceGet(): void
-    {
-        $this->assertInstanceOf(
-            Api\OrderApi::class,
-            Api::order()
+            \KMA\IikoApi\Entity\Nomenclature::class,
+            $this->iiko->nomenclature($orgId)
         );
     }
 }
