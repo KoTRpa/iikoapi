@@ -22,9 +22,9 @@ class AliasLoader
     /**
      * The singleton instance of the loader.
      *
-     * @var AliasLoader
+     * @var AliasLoader|null
      */
-    protected static AliasLoader $instance;
+    protected static ?AliasLoader $instance = null;
 
     /**
      * Create a new AliasLoader instance.
