@@ -12,6 +12,7 @@ use KMA\IikoApi\Traits\Http;
 /**
  * Trait Organization
  * @package KMA\IikoApi\Api
+ * @version 0.1.0
  *
  * @mixin Http
  * @mixin Iiko
