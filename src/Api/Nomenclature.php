@@ -11,7 +11,7 @@ use KMA\IikoApi\Traits\Http;
 use JsonMapper;
 
 /**
- * Trait Nomenclature
+ * Nomenclature APIs
  * @package KMA\IikoApi\Api
  * @version 1.0.0
  *

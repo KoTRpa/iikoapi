@@ -10,8 +10,9 @@ use KMA\IikoApi\Traits\Http;
 use KMA\IikoApi\Exceptions\IikoApiException;
 
 /**
- * Trait Token
+ * Get Token API
  * @package KMA\IikoApi\Api
+ * @version 1.0.0
  *
  * @mixin Http
  * @mixin Iiko

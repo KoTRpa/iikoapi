@@ -10,7 +10,7 @@ use KMA\IikoApi\Iiko;
 use KMA\IikoApi\Traits\Http;
 
 /**
- * Trait Organization
+ * Organization APIs
  * @package KMA\IikoApi\Api
  * @version 0.1.0
  *
