@@ -3,25 +3,40 @@
 
 namespace KMA\IikoApi\Api;
 
+use JsonMapper;
 use KMA\IikoApi\Entity\OrganizationInfo;
-use KMA\IikoApi\Exceptions\IikoResponseException;
+use KMA\IikoApi\Exceptions\IikoApiException;
+use KMA\IikoApi\Iiko;
+use KMA\IikoApi\Traits\Http;
 
-class OrganizationApi extends Api
+/**
+ * Trait Organization
+ * @package KMA\IikoApi\Api
+ *
+ * @mixin Http
+ * @mixin Iiko
+ */
+trait Organization
 {
     /**
      * @return OrganizationInfo[]
      * @throws \JsonMapper_Exception
-     * @throws IikoResponseException
+     * @throws IikoApiException
      */
-    public function get(): array
+    public function organizationList(): array
     {
-        $url = $this->url . '/organization/list';
-        $query = ['access_token' => $this->token];
+        $endpoint = '/organization/list';
 
-        $response = $this->remote->get($url, $query);
+        $params = [
+            'access_token' => $this->token(),
+        ];
 
-        return $this->mapper->mapArray(
-            $response, [], OrganizationInfo::class
+        $response = $this->get($endpoint, $params);
+
+        return (new JsonMapper())->mapArray(
+            $response->getDecodedBody(),
+            [],
+            OrganizationInfo::class
         );
     }
 }

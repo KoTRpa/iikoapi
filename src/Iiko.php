@@ -13,7 +13,8 @@ class Iiko
     use Traits\Http;
 
     use Api\Token,
-        Api\Nomenclature;
+        Api\Nomenclature,
+        Api\Organization;
 
     protected JsonMapper $mapper;
 

@@ -27,4 +27,16 @@ class ApiTest extends TestCase
             $this->iiko->nomenclature($orgId)
         );
     }
+
+    public function testOrganizationList(): void
+    {
+        $orgList = $this->iiko->organizationList();
+        $this->assertIsArray($orgList);
+        foreach ($orgList as $orgInfo) {
+            $this->assertInstanceOf(
+                \KMA\IikoApi\Entity\OrganizationInfo::class,
+                $orgInfo
+            );
+        }
+    }
 }
