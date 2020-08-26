@@ -16,6 +16,6 @@ class IikoFacade extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'iiko';
+        return 'Iiko';
     }
 }

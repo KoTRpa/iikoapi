@@ -4,30 +4,31 @@
 namespace KMA\IikoApi;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Contracts\Container\Container as Application;
 
 class IikoServiceProvider extends ServiceProvider
 {
-    /** @var bool Indicates if loading of the provider is deferred. */
-    protected $defer = true;
-
     /** Boot the service provider. */
     public function boot()
     {
-        $this->setupConfig($this->app);
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__.'/../config/iiko.php' => config_path('iiko.php'),
+            ], 'config');
+        }
     }
 
     /**
-     * Setup the config.
-     *
-     * @param Application $app
+     * Register the application services.
      */
-    protected function setupConfig(Application $app)
+    public function register()
     {
-        $source = __DIR__ . '/config/iiko.php';
+        // Automatically apply the package configuration
+        $this->mergeConfigFrom(__DIR__.'/../config/iiko.php', 'iiko');
 
-        $this->publishes([$source => config_path('iiko.php')]);
-
-        $this->mergeConfigFrom($source, 'iiko');
+        // Register the main class to use with the facade
+        $this->app->bind('Iiko', function ($app) {
+            $config = app('config')->get('iiko');
+            return new Iiko($config);
+        });
     }
 }
