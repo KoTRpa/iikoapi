@@ -4,7 +4,7 @@ namespace KMA\IikoApi\Entity;
 
 use Exception;
 
-abstract class Base implements \JsonSerializable
+abstract class Base extends \ArrayObject implements \JsonSerializable
 {
     /**
      * @return array
