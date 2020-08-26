@@ -25,8 +25,8 @@ class IikoResponse
     /** @var string The raw body of the response from API request. */
     protected string $body;
 
-    /** @var array The decoded body of the API response. */
-    protected array $decodedBody = [];
+    /** @var array|string The decoded body of the API response. */
+    protected $decodedBody;
 
     /** @var string API Endpoint used to make the request. */
     protected string $endPoint;
@@ -72,13 +72,9 @@ class IikoResponse
             $this->decodedBody = json_decode($this->body, true);
         }
 
-        if ($this->decodedBody === null) {
+        if (null === $this->decodedBody) {
             $this->decodedBody = [];
             parse_str($this->body, $this->decodedBody);
-        }
-
-        if (! is_array($this->decodedBody)) {
-            $this->decodedBody = [];
         }
 
         if ($this->isError()) {
@@ -168,9 +164,9 @@ class IikoResponse
     /**
      * Return the decoded body response.
      *
-     * @return array
+     * @return array|string
      */
-    public function getDecodedBody(): array
+    public function getDecodedBody()
     {
         return $this->decodedBody;
     }

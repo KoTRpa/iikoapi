@@ -53,7 +53,9 @@ class IikoRequest
         array $params = [],
         $isAsyncRequest = false
     ) {
-        $this->setAccessToken($accessToken);
+        if (null !== $accessToken) {
+            $this->setAccessToken($accessToken);
+        }
         $this->setMethod($method);
         $this->setEndpoint($endpoint);
         $this->setParams($params);
@@ -82,7 +84,7 @@ class IikoRequest
     public function validateAccessToken()
     {
         if (null === $this->getAccessToken()) {
-            throw new IikoApiException('You must provide your bot access token to make any API requests.');
+            throw new IikoApiException('You must provide access token to make API requests.');
         }
     }
 
@@ -91,7 +93,7 @@ class IikoRequest
      *
      * @return string|null
      */
-    public function getAccessToken()
+    public function getAccessToken(): ?string
     {
         return $this->accessToken;
     }

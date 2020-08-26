@@ -19,7 +19,7 @@ final class IikoClient
     protected $httpClientHandler;
 
     /**
-     * Instantiates a new TelegramClient object.
+     * Instantiates a new IikoClient object
      *
      * @param string $baseUrl
      * @param IHttpClient|null $httpClientHandler

@@ -15,10 +15,10 @@ trait Http
 {
     use Validator;
 
-    /** @var string Iiko API Access Token. */
+    /** @var string|null Iiko API Access Token. */
     protected ?string $accessToken = null;
 
-    /** @var IikoClient The Iiko API client service. */
+    /** @var IikoClient|null The Iiko API client service. */
     protected ?IikoClient $client = null;
 
     /** @var IHttpClient|null Http Client Handler */
@@ -58,7 +58,10 @@ trait Http
     protected function getClient(): IikoClient
     {
         if ($this->client === null) {
-            $this->client = new IikoClient($this->httpClientHandler);
+            $this->client = new IikoClient(
+                $this->getConfig('url'),
+                $this->httpClientHandler
+            );
         }
 
         return $this->client;
@@ -75,17 +78,17 @@ trait Http
     }
 
     /**
-     * Returns Telegram Bot API Access Token.
+     * Returns API Access Token.
      *
-     * @return string
+     * @return string|null
      */
-    public function getAccessToken(): string
+    public function getAccessToken(): ?string
     {
         return $this->accessToken;
     }
 
     /**
-     * Sets the bot access token to use with API requests.
+     * Sets the access token to use with API requests.
      *
      * @param string $accessToken The bot access token to save.
      *
