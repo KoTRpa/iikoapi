@@ -5,7 +5,7 @@ namespace KMA\IikoApi;
 use JsonMapper;
 use KMA\IikoApi\Exceptions\IikoResponseException;
 
-
+// TODO: replace fucking-shit-dick-JsonMapper with normal collections!!!!!!!
 class Iiko
 {
 
@@ -14,7 +14,8 @@ class Iiko
 
     use Api\Token,
         Api\Nomenclature,
-        Api\Organization;
+        Api\Organization,
+        Api\Order;
 
     protected JsonMapper $mapper;
 
