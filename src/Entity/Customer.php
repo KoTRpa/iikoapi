@@ -2,7 +2,7 @@
 
 namespace KMA\IikoApi\Entity;
 
-use KMA\IikoApi\Type\ShortDateTime;
+use KMA\IikoApi\Entity\Type\ShortDateTime;
 
 /**
  * Class Customer
