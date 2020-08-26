@@ -97,7 +97,7 @@ final class IikoClient
      */
     public function prepareRequest(IikoRequest $request): array
     {
-        $url = $this->getBaseUrl() . '/' . $request->getEndpoint();
+        $url = $this->getBaseUrl() . $request->getEndpoint();
 
         return [
             $url,
