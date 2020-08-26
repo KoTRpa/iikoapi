@@ -244,6 +244,6 @@ trait Http
     private function normalizeParams(array $params)
     {
 
-        return ['body' => $params];
+        return ['form_params' => $params];
     }
 }
