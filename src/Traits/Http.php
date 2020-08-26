@@ -191,7 +191,7 @@ trait Http
      */
     protected function post(string $endpoint, array $params = []): IikoResponse
     {
-        $params = $this->normalizeParams($params);
+        // $params = $this->normalizeParams($params);
 
         return $this->sendRequest('POST', $endpoint, $params);
     }
