@@ -34,8 +34,11 @@ trait Organization
 
         $response = $this->get($endpoint, $params);
 
+        $json = \GuzzleHttp\json_decode($response->getBody(), false);
+
+
         return (new JsonMapper())->mapArray(
-            $response->getDecodedBody(),
+            $json,
             [],
             OrganizationInfo::class
         );

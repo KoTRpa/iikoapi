@@ -3,7 +3,7 @@
 
 namespace KMA\IikoApi\Api;
 
-use KMA\IikoApi\Entity\Nomenclature as Entity;
+use KMA\IikoApi\Entity\Nomenclature as NomenclatureEntity;
 use KMA\IikoApi\Exceptions\IikoApiException;
 
 use KMA\IikoApi\Iiko;
@@ -22,11 +22,11 @@ trait Nomenclature
 {
     /**
      * @param string $orgId iiko organization id
-     * @return Entity KMA\IikoApi\Entity\Nomenclature
+     * @return NomenclatureEntity KMA\IikoApi\Entity\Nomenclature
      * @throws \JsonMapper_Exception
      * @throws IikoApiException
      */
-    public function nomenclature(string $orgId): Entity
+    public function nomenclature(string $orgId): NomenclatureEntity
     {
         $endpoint = '/nomenclature/' . $orgId;
 
@@ -36,8 +36,10 @@ trait Nomenclature
 
         $response = $this->get($endpoint, $params);
 
-        return (new JsonMapper())->mapArray(
-            $response->getDecodedBody(), new Entity()
+        $json = \GuzzleHttp\json_decode($response->getBody(), false);
+
+        return (new JsonMapper())->map(
+            (object)$json, new NomenclatureEntity()
         );
     }
 }
