@@ -15,7 +15,8 @@ class Iiko
     use Api\Token,
         Api\Nomenclature,
         Api\Organization,
-        Api\Order;
+        Api\Order,
+        Api\Streets;
 
     protected JsonMapper $mapper;
 

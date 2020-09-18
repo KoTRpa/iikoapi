@@ -114,4 +114,19 @@ class ApiTest extends TestCase
 
         $this->assertInstanceOf(OrderInfo::class, $this->iiko->orderAdd($orderRequest));
     }
+
+    public function testStreets()
+    {
+        $orgId = 'e464c693-4a57-11e5-80c1-d8d385655247';
+        $cityId = 'b090de0b-8550-6e17-70b2-bbba152bcbd3';
+
+        $streets = $this->iiko->streets($orgId, $cityId);
+        $this->assertIsArray($streets);
+        foreach ($streets as $street) {
+            $this->assertInstanceOf(
+                \KMA\IikoApi\Entity\Street::class,
+                $street
+            );
+        }
+    }
 }
