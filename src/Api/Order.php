@@ -170,4 +170,19 @@ trait Order
             $json, new OrderInfo
         );
     }
+
+    /**
+     * Sugar for orderInfo
+     *
+     * @param string $organization
+     * @param string $orderId
+     * @param TimeSpan|null $requestTimeout
+     * @return OrderInfo
+     * @throws IikoApiException
+     * @throws \JsonMapper_Exception
+     */
+    public function order(string $organization, string $orderId, ?TimeSpan $requestTimeout = null): OrderInfo
+    {
+        return $this->orderInfo($organization, $orderId, $requestTimeout = null);
+    }
 }
