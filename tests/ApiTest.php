@@ -132,6 +132,26 @@ class ApiTest extends TestCase
         }
     }
 
+    public function testOrder()
+    {
+        $orgId = 'e464c693-4a57-11e5-80c1-d8d385655247';
+        $orders = $this->iiko->orders(
+            $orgId,
+            date('Y-m-d'),
+            date('Y-m-d')
+        );
+        $lastOrder = reset($orders);
+        $orderId = $lastOrder->orderId;
+        $order = $this->iiko->orderInfo(
+            $orgId,
+            $orderId
+        );
+        $this->assertInstanceOf(
+            \KMA\IikoApi\Entity\OrderInfo::class,
+            $order
+        );
+    }
+
     public function testStreets()
     {
         $orgId = 'e464c693-4a57-11e5-80c1-d8d385655247';

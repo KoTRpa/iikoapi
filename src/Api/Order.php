@@ -137,4 +137,37 @@ trait Order
             $json, [], OrderInfo::class
         );
     }
+
+    /**
+     * Получение информации о предварительно созданном заказе.
+     *
+     * @param string $organization
+     * @param string $orderId
+     * @param TimeSpan|null $requestTimeout
+     * @return OrderInfo
+     * @throws IikoApiException
+     * @throws \JsonMapper_Exception
+     */
+    public function orderInfo(string $organization, string $orderId, ?TimeSpan $requestTimeout = null): OrderInfo
+    {
+        if (null === $requestTimeout) {
+            $requestTimeout = new TimeSpan(0, 0, 30);
+        }
+
+        $endpoint = '/orders/info';
+
+        $query = [
+            'access_token' => $this->token(),
+            'organization' => $organization,
+            'order' => $orderId,
+            'request_timeout' => $requestTimeout
+        ];
+
+        $response = $this->get($endpoint, $query);
+        $json = \GuzzleHttp\json_decode($response->getBody(), false);
+
+        return (new JsonMapper())->map(
+            $json, new OrderInfo
+        );
+    }
 }
