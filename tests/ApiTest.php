@@ -166,4 +166,18 @@ class ApiTest extends TestCase
             );
         }
     }
+
+    public function testGetCouriers()
+    {
+        $orgId = 'e464c693-4a57-11e5-80c1-d8d385655247';
+
+        $couriers = $this->iiko->getCouriers($orgId);
+        $this->assertIsArray($couriers);
+        foreach ($couriers as $courier) {
+            $this->assertInstanceOf(
+                \KMA\IikoApi\Entity\OrganizationUser::class,
+                $courier
+            );
+        }
+    }
 }
