@@ -9,6 +9,7 @@ use KMA\IikoApi\Entity\OrderRequest;
 use KMA\IikoApi\Entity\Type\TimeSpan;
 use KMA\IikoApi\Exceptions\IikoApiException;
 
+use KMA\IikoApi\Exceptions\OrderInfoException;
 use KMA\IikoApi\Iiko;
 use KMA\IikoApi\Traits\Http;
 use JsonMapper;
@@ -145,8 +146,9 @@ trait Order
      * @param string $orderId
      * @param TimeSpan|null $requestTimeout
      * @return OrderInfo
-     * @throws IikoApiException
+     * @throws OrderInfoException
      * @throws \JsonMapper_Exception
+     * @throws \Exception
      */
     public function orderInfo(string $organization, string $orderId, ?TimeSpan $requestTimeout = null): OrderInfo
     {
@@ -163,8 +165,14 @@ trait Order
             'request_timeout' => $requestTimeout
         ];
 
-        $response = $this->get($endpoint, $query);
-        $json = \GuzzleHttp\json_decode($response->getBody(), false);
+        try {
+            $response = $this->get($endpoint, $query);
+            $json = \GuzzleHttp\json_decode($response->getBody(), false);
+        } catch (IikoApiException $e) {
+            throw new OrderInfoException($e->getMessage(), $e->getCode(), $e);
+        } catch (\Exception $e) {
+            throw $e;
+        }
 
         return (new JsonMapper())->map(
             $json, new OrderInfo

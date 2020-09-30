@@ -4,6 +4,7 @@ namespace KMA\IikoApi\Tests;
 
 
 use KMA\IikoApi\Entity\OrderInfo;
+use KMA\IikoApi\Exceptions\OrderInfoException;
 use PHPUnit\Framework\TestCase;
 
 use KMA\IikoApi\Iiko;
@@ -150,6 +151,20 @@ class ApiTest extends TestCase
             \KMA\IikoApi\Entity\OrderInfo::class,
             $order
         );
+    }
+
+    public function testOrderWrongIdFormat()
+    {
+        $this->expectException(OrderInfoException::class);
+        $this->expectExceptionCode(400);
+        $this->iiko->orderInfo($this->orgId, '123');
+    }
+
+    public function testOrderNotFound()
+    {
+        $this->expectException(OrderInfoException::class);
+        $this->expectExceptionCode(500);
+        $this->iiko->orderInfo($this->orgId, $this->orgId);
     }
 
     public function testStreets()
