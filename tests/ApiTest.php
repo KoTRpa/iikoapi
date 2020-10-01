@@ -28,11 +28,9 @@ class ApiTest extends TestCase
 
     public function testNomenclature(): void
     {
-        // orgId for test server
-        $orgId = 'e464c693-4a57-11e5-80c1-d8d385655247';
         $this->assertInstanceOf(
             \KMA\IikoApi\Entity\Nomenclature::class,
-            $this->iiko->nomenclature($orgId)
+            $this->iiko->nomenclature($this->orgId)
         );
     }
 
@@ -50,8 +48,6 @@ class ApiTest extends TestCase
 
     public function testOrderAdd(): void
     {
-        $orgId = 'e464c693-4a57-11e5-80c1-d8d385655247';
-
         $customer = new Customer();
         $customer->name = 'Иван';
         $customer->phone = '71235678901';
@@ -109,7 +105,7 @@ class ApiTest extends TestCase
         }, $products);
 
         $orderRequest = new OrderRequest();
-        $orderRequest->organization = $orgId;
+        $orderRequest->organization = $this->orgId;
         $orderRequest->customer = $customer;
         $orderRequest->order = $order;
 
@@ -118,9 +114,8 @@ class ApiTest extends TestCase
 
     public function testOrders()
     {
-        $orgId = 'e464c693-4a57-11e5-80c1-d8d385655247';
         $orders = $this->iiko->orders(
-            $orgId,
+            $this->orgId,
             date('Y-m-d', strtotime('-1 day')),
             date('Y-m-d')
         );
@@ -135,16 +130,15 @@ class ApiTest extends TestCase
 
     public function testOrder()
     {
-        $orgId = 'e464c693-4a57-11e5-80c1-d8d385655247';
         $orders = $this->iiko->orders(
-            $orgId,
+            $this->orgId,
             date('Y-m-d'),
             date('Y-m-d')
         );
         $lastOrder = reset($orders);
         $orderId = $lastOrder->orderId;
         $order = $this->iiko->orderInfo(
-            $orgId,
+            $this->orgId,
             $orderId
         );
         $this->assertInstanceOf(
@@ -169,10 +163,9 @@ class ApiTest extends TestCase
 
     public function testStreets()
     {
-        $orgId = 'e464c693-4a57-11e5-80c1-d8d385655247';
         $cityId = 'b090de0b-8550-6e17-70b2-bbba152bcbd3';
 
-        $streets = $this->iiko->streets($orgId, $cityId);
+        $streets = $this->iiko->streets($this->orgId, $cityId);
         $this->assertIsArray($streets);
         foreach ($streets as $street) {
             $this->assertInstanceOf(
@@ -184,9 +177,7 @@ class ApiTest extends TestCase
 
     public function testGetCouriers()
     {
-        $orgId = 'e464c693-4a57-11e5-80c1-d8d385655247';
-
-        $couriers = $this->iiko->getCouriers($orgId);
+        $couriers = $this->iiko->getCouriers($this->orgId);
         $this->assertIsArray($couriers);
         foreach ($couriers as $courier) {
             $this->assertInstanceOf(
