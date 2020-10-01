@@ -5,7 +5,7 @@ namespace KMA\IikoApi\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * Class Telegram.
+ * IikoFacade
  */
 class IikoFacade extends Facade
 {
