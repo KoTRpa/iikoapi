@@ -89,6 +89,10 @@ class IikoResponse
      */
     public function isError(): bool
     {
+        if ($this->getHttpStatusCode() === 204) {
+            return false;
+        }
+
         return ($this->getHttpStatusCode() >= 400 || !$this->isJson($this->body));
     }
 
