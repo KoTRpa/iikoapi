@@ -4,6 +4,7 @@ namespace KMA\IikoApi\Tests;
 
 
 use KMA\IikoApi\Entity\OrderInfo;
+use KMA\IikoApi\Entity\Request\AddOrderProblemRequest;
 use KMA\IikoApi\Exceptions\OrderInfoException;
 use PHPUnit\Framework\TestCase;
 
@@ -132,7 +133,7 @@ class ApiTest extends TestCase
     {
         $orders = $this->iiko->orders(
             $this->orgId,
-            date('Y-m-d'),
+            date('Y-m-d', strtotime('-1 day')),
             date('Y-m-d')
         );
         $lastOrder = reset($orders);
@@ -209,5 +210,28 @@ class ApiTest extends TestCase
                 $courier
             );
         }
+    }
+
+    public function testAddOrderProblem()
+    {
+        $orders = $this->iiko->orders(
+            $this->orgId,
+            date('Y-m-d', strtotime('-1 day')),
+            date('Y-m-d')
+        );
+        $lastOrder = reset($orders);
+        $orderId = $lastOrder->orderId;
+        
+        $orderProblemRequest = new AddOrderProblemRequest();
+        $orderProblemRequest->orderId = $orderId;
+        $orderProblemRequest->problemText = 'Test text';
+        
+        try {
+            $this->iiko->addOrderProblem($this->orgId, $orderProblemRequest);
+        } catch (\Exception $e) {
+            $this->fail('exception thrown');
+        }
+        
+        $this->assertTrue(true);
     }
 }
