@@ -5,6 +5,7 @@ namespace KMA\IikoApi\Tests;
 
 use KMA\IikoApi\Entity\OrderInfo;
 use KMA\IikoApi\Entity\Request\AddOrderProblemRequest;
+use KMA\IikoApi\Entity\Request\AssignCourierRequest;
 use KMA\IikoApi\Exceptions\OrderInfoException;
 use PHPUnit\Framework\TestCase;
 
@@ -212,6 +213,32 @@ class ApiTest extends TestCase
         }
     }
 
+    // в тестовой айке нет готовых к доставке заказов =(
+    // public function testAssignCourier()
+    // {
+    //     $orders = $this->iiko->orders(
+    //         $this->orgId,
+    //         date('Y-m-d', strtotime('-1 day')),
+    //         date('Y-m-d')
+    //     );
+    //     $lastOrder = reset($orders);
+    //
+    //     $couriers = $this->iiko->getCouriers($this->orgId);
+    //     $courier = reset($couriers);
+    //
+    //     $assignCourierRequest = new AssignCourierRequest();
+    //     $assignCourierRequest->orderId = $lastOrder->orderId;
+    //     $assignCourierRequest->courierId = $courier->id;
+    //
+    //     try {
+    //         $this->iiko->assignCourier($this->orgId, $assignCourierRequest);
+    //     } catch (\Exception $e) {
+    //         $this->fail('exception thrown');
+    //     }
+    //
+    //     $this->assertTrue(true);
+    // }
+
     public function testAddOrderProblem()
     {
         $orders = $this->iiko->orders(
@@ -221,17 +248,17 @@ class ApiTest extends TestCase
         );
         $lastOrder = reset($orders);
         $orderId = $lastOrder->orderId;
-        
+
         $orderProblemRequest = new AddOrderProblemRequest();
         $orderProblemRequest->orderId = $orderId;
         $orderProblemRequest->problemText = 'Test text';
-        
+
         try {
             $this->iiko->addOrderProblem($this->orgId, $orderProblemRequest);
         } catch (\Exception $e) {
             $this->fail('exception thrown');
         }
-        
+
         $this->assertTrue(true);
     }
 }

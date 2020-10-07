@@ -7,6 +7,7 @@ use KMA\IikoApi\Entity\Enum\DeliveryStatus;
 use KMA\IikoApi\Entity\OrderInfo;
 use KMA\IikoApi\Entity\OrderRequest;
 use KMA\IikoApi\Entity\Request\AddOrderProblemRequest;
+use KMA\IikoApi\Entity\Request\AssignCourierRequest;
 use KMA\IikoApi\Entity\Type\TimeSpan;
 use KMA\IikoApi\Exceptions\IikoApiException;
 
@@ -220,6 +221,35 @@ trait Order
         );
 
         $params = ['json' => $orderProblemRequest];
+
+        $this->post($endpoint, $params);
+    }
+
+    /**
+     * Привязка курьера к заказу
+     * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.35zlu3m0pr7f
+     *
+     * @param string $organization
+     * @param AssignCourierRequest $assignCourierRequest
+     * @param TimeSpan|null $timeout
+     * @throws IikoApiException
+     * @throws \KMA\IikoApi\Exceptions\IikoResponseException
+     */
+    public function assignCourier(string $organization, AssignCourierRequest $assignCourierRequest, ?TimeSpan $timeout = null): void
+    {
+        if (null === $timeout) {
+            $timeout = new TimeSpan(0, 1, 0);
+        }
+
+        // for unknown reasons iiko requires get params in post request >_<
+        $endpoint = sprintf(
+            '/orders/assigncourier?access_token=%s&organization=%s&requestTimeout=%s',
+            $this->token(),
+            $organization,
+            (string)$timeout
+        );
+
+        $params = ['json' => $assignCourierRequest];
 
         $this->post($endpoint, $params);
     }
