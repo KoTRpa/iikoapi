@@ -200,10 +200,9 @@ trait Order
      * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.35zlu3m0pr7f
      *
      * @param string $organization
-     * @param AddOrderProblemRequest $orderRequest
+     * @param AddOrderProblemRequest $orderProblemRequest
      * @param TimeSpan|null $timeout
      * @throws IikoApiException
-     * @throws \JsonMapper_Exception
      * @throws \KMA\IikoApi\Exceptions\IikoResponseException
      */
     public function addOrderProblem(string $organization, AddOrderProblemRequest $orderProblemRequest, ?TimeSpan $timeout = null): void
