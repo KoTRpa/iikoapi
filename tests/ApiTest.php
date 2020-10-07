@@ -187,6 +187,18 @@ class ApiTest extends TestCase
         }
     }
 
+    public function testCitiesList()
+    {
+        $cities = $this->iiko->citiesList($this->orgId,);
+        $this->assertIsArray($cities);
+        foreach ($cities as $city) {
+            $this->assertInstanceOf(
+                \KMA\IikoApi\Entity\City::class,
+                $city
+            );
+        }
+    }
+
     public function testGetCouriers()
     {
         $couriers = $this->iiko->getCouriers($this->orgId);

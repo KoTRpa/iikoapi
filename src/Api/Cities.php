@@ -3,6 +3,7 @@
 
 namespace KMA\IikoApi\Api;
 
+use KMA\IikoApi\Entity\City;
 use KMA\IikoApi\Entity\CityWithStreets;
 use KMA\IikoApi\Exceptions\IikoApiException;
 
@@ -26,7 +27,7 @@ trait Cities
      * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.qyzl28mgceph
      *
      * @param string $orgId iiko organization id
-     * @return CityWithStreets[] KMA\IikoApi\Entity\Nomenclature
+     * @return CityWithStreets[]
      * @throws IikoApiException
      * @throws \JsonMapper_Exception
      */
@@ -45,6 +46,34 @@ trait Cities
 
         return (new JsonMapper())->mapArray(
             $json, [], CityWithStreets::class
+        );
+    }
+
+    /**
+     * Список город (без улиц)
+     * Метод возвращает список всех городов заданной организации. Эти данные могут быть использовать для задания адреса доставки.
+     * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.c48svjxtxdwu
+     *
+     * @param string $orgId iiko organization id
+     * @return City[]
+     * @throws IikoApiException
+     * @throws \JsonMapper_Exception
+     */
+    public function citiesList(string $orgId): array
+    {
+        $endpoint = '/cities/citiesList';
+
+        $params = [
+            'access_token' => $this->token(),
+            'organization' => $orgId,
+        ];
+
+        $response = $this->get($endpoint, $params);
+
+        $json = \GuzzleHttp\json_decode($response->getBody(), false);
+
+        return (new JsonMapper())->mapArray(
+            $json, [], City::class
         );
     }
 }
