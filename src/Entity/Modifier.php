@@ -45,4 +45,9 @@ class Modifier extends Base
      * @var array|null Дочерние модификаторы. Бывают только для групповых модификаторов (?ChoiceBindings[])
      */
     public ?array $childModifiers = null;
+
+    /**
+     * @var bool|null
+     */
+    public ?bool $required = null;
 }
