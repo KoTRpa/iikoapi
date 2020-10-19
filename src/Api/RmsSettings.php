@@ -4,6 +4,7 @@
 namespace KMA\IikoApi\Api;
 
 use KMA\IikoApi\Entity\OrganizationUser;
+use KMA\IikoApi\Entity\PaymentType;
 use KMA\IikoApi\Exceptions\IikoApiException;
 
 use KMA\IikoApi\Iiko;
@@ -58,6 +59,34 @@ trait RmsSettings
 
         return (new JsonMapper())->mapArray(
             $json->users, [], OrganizationUser::class
+        );
+    }
+
+    /**
+     * Запрос возвращает список внешних типов оплат для заданного ресторана.
+     * Внешними считаются типы, процессинг которых идет не на стороне iiko.
+     * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.c88aygwtq5iv
+     *
+     * @param string $organization
+     * @return \KMA\IikoApi\Entity\PaymentType[]
+     * @throws IikoApiException
+     * @throws \JsonMapper_Exception
+     */
+    public function getPaymentTypes(string $organization): array
+    {
+        $endpoint = '/rmsSettings/getPaymentTypes';
+
+        $params = [
+            'access_token' => $this->token(),
+            'organization' => $organization,
+        ];
+
+        $response = $this->get($endpoint, $params);
+
+        $json = \GuzzleHttp\json_decode($response->getBody(), false);
+
+        return (new JsonMapper())->mapArray(
+            $json->paymentTypes, [], PaymentType::class
         );
     }
 }

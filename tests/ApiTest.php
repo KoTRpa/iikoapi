@@ -213,6 +213,18 @@ class ApiTest extends TestCase
         }
     }
 
+    public function testGetPaymentTypes()
+    {
+        $items = $this->iiko->getPaymentTypes($this->orgId);
+        $this->assertIsArray($items);
+        foreach ($items as $item) {
+            $this->assertInstanceOf(
+                \KMA\IikoApi\Entity\PaymentType::class,
+                $item
+            );
+        }
+    }
+
     // в тестовой айке нет готовых к доставке заказов =(
     // public function testAssignCourier()
     // {
