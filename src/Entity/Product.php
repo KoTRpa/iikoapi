@@ -145,7 +145,7 @@ class Product extends Base
     /**
      * @var string|null Единица измерения товара ( кг, л, шт, порц.)
      */
-    public ?string $MeasureUnit = null;
+    public ?string $measureUnit = null;
 
     /**
      * @var bool|null Блюдо не нужно печатать на чеке. Актуально только для модификаторов.
