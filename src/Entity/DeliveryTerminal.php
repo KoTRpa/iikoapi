@@ -45,7 +45,7 @@ class DeliveryTerminal extends Base
     /**
      * @var null|\KMA\IikoApi\Entity\OpeningHours[] Время работы ресторана
      */
-    public ?array $workTime = null;
+    public ?array $openingHours = null;
 
     /**
      * @var null|int Номер ревизии сущности из РМС
