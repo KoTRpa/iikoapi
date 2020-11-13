@@ -18,7 +18,8 @@ class Iiko
         Api\Order,
         Api\Streets,
         Api\Cities,
-        Api\RmsSettings;
+        Api\RmsSettings,
+        Api\DeliverySettings;
 
     protected JsonMapper $mapper;
 

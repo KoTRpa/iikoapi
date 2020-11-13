@@ -273,4 +273,16 @@ class ApiTest extends TestCase
 
         $this->assertTrue(true);
     }
+
+    public function testDeliveryTerminals()
+    {
+        $items = $this->iiko->getDeliveryTerminals($this->orgId);
+        $this->assertIsArray($items);
+        foreach ($items as $item) {
+            $this->assertInstanceOf(
+                \KMA\IikoApi\Entity\DeliveryTerminal::class,
+                $item
+            );
+        }
+    }
 }
