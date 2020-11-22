@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'url' => 'https://iiko.biz:9900/api/0',
-    'user' => 'demoDelivery',
-    'password' => 'PI1yFaKFCGvvJKi',
+    'url' => env('IIKO_URL', 'https://iiko.biz:9900/api/0'),
+    'user' => env('IIKO_USER', 'demoDelivery'),
+    'password' => env('IIKO_PASSWORD', 'PI1yFaKFCGvvJKi'),
 
     /*
     |--------------------------------------------------------------------------
