@@ -6,6 +6,7 @@ namespace KMA\IikoApi\Tests;
 use KMA\IikoApi\Entity\OrderInfo;
 use KMA\IikoApi\Entity\Request\AddOrderProblemRequest;
 use KMA\IikoApi\Entity\Request\AssignCourierRequest;
+use KMA\IikoApi\Entity\Type\DateTime;
 use KMA\IikoApi\Exceptions\OrderInfoException;
 use PHPUnit\Framework\TestCase;
 
@@ -285,4 +286,31 @@ class ApiTest extends TestCase
             );
         }
     }
+
+    // public function testSetOrderDelivered()
+    // {
+    //     $orders = $this->iiko->orders(
+    //         $this->orgId,
+    //         date('Y-m-d', strtotime('-1 day')),
+    //         date('Y-m-d')
+    //     );
+    //     $lastOrder = reset($orders);
+    //
+    //     $couriers = $this->iiko->getCouriers($this->orgId);
+    //     $courier = reset($couriers);
+    //
+    //     $request = new \KMA\IikoApi\Entity\Request\SetOrderDeliveredRequest();
+    //     $request->orderId = $lastOrder->orderId;
+    //     $request->courierId = $courier->id;
+    //     $request->delivered = true;
+    //     $request->actualDeliveryTime = date('Y-m-d H:i:s');
+    //
+    //     try {
+    //         $this->iiko->setOrderDelivered($this->orgId, $request);
+    //     } catch (\Exception $e) {
+    //         $this->fail('exception thrown');
+    //     }
+    //
+    //     $this->assertTrue(true);
+    // }
 }

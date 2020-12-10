@@ -8,6 +8,7 @@ use KMA\IikoApi\Entity\OrderInfo;
 use KMA\IikoApi\Entity\OrderRequest;
 use KMA\IikoApi\Entity\Request\AddOrderProblemRequest;
 use KMA\IikoApi\Entity\Request\AssignCourierRequest;
+use KMA\IikoApi\Entity\Request\SetOrderDeliveredRequest;
 use KMA\IikoApi\Entity\Type\TimeSpan;
 use KMA\IikoApi\Exceptions\IikoApiException;
 
@@ -250,6 +251,34 @@ trait Order
         );
 
         $params = ['json' => $assignCourierRequest];
+
+        $this->post($endpoint, $params);
+    }
+
+    /**
+     * Отметить заказ доставленным или недоставленным.
+     * post
+     * @param string $organization
+     * @param \KMA\IikoApi\Entity\Request\SetOrderDeliveredRequest $request
+     * @param TimeSpan|null $timeout
+     * @throws IikoApiException
+     * @throws \KMA\IikoApi\Exceptions\IikoResponseException
+     */
+    public function setOrderDelivered(string $organization, SetOrderDeliveredRequest $request, ?TimeSpan $timeout = null)
+    {
+        if (null === $timeout) {
+            $timeout = new TimeSpan(0, 1, 0);
+        }
+
+        // for unknown reasons iiko requires get params in post request >_<
+        $endpoint = sprintf(
+            '/orders/set_order_delivered?access_token=%s&organization=%s&requestTimeout=%s',
+            $this->token(),
+            $organization,
+            (string)$timeout
+        );
+
+        $params = ['json' => $request];
 
         $this->post($endpoint, $params);
     }
