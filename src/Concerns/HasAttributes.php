@@ -1,7 +1,7 @@
 <?php
 
 
-namespace KMA\IikoApi\Entities\Concerns;
+namespace KMA\IikoApi\Concerns;
 
 use Carbon\CarbonInterface;
 use DateTimeInterface;

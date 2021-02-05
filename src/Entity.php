@@ -5,7 +5,7 @@ namespace KMA\IikoApi;
 use Exception;
 use JsonException;
 
-use KMA\IikoApi\Entities\Concerns;
+use KMA\IikoApi\Concerns;
 
 abstract class Entity implements \JsonSerializable
 {
