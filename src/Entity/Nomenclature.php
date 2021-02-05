@@ -12,17 +12,17 @@ namespace KMA\IikoApi\Entity;
 class Nomenclature extends Base
 {
     /**
-     * @var Group[] Группы
+     * @var \KMA\IikoApi\Entity\Group[] Группы
      */
     public array $groups;
 
     /**
-     * @var Product[] Продукты
+     * @var \KMA\IikoApi\Entity\Product[] Продукты
      */
     public array $products;
 
     /**
-     * @var ProductCategory[] Группы продуктов
+     * @var \KMA\IikoApi\Entity\ProductCategory[] Группы продуктов
      */
     public array $productCategories;
 
