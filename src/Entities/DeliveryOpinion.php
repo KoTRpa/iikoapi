@@ -1,18 +1,17 @@
 <?php
 
-
 namespace KMA\IikoApi\Entities;
+
+use KMA\IikoApi\Entity;
 
 /**
  * Оценки доставки клиентом
- * @package KMA\IikoApi\Entities
  * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.uio23wd38xkh
  */
 class DeliveryOpinion extends Entity
 {
     /**
      * @var string|null GUID Идентификатор организации
-     * TODO: (iiko fixit) в доках обязательное поле, но может приходить null
      */
     public ?string $organization = null;
 

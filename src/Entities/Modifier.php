@@ -1,14 +1,13 @@
 <?php
-/**
- * Class Modifier
- * @package KMA\IikoApi\Entities
- * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.ez12web8aym2
- *
- * @noinspection PhpUnused
- */
 
 namespace KMA\IikoApi\Entities;
 
+use KMA\IikoApi\Entity;
+
+/**
+ * Модификатор
+ * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.ez12web8aym2
+ */
 class Modifier extends Entity
 {
     /**

@@ -1,18 +1,16 @@
 <?php
 
-
 namespace KMA\IikoApi\Entities;
 
+use KMA\IikoApi\Entity;
 use KMA\IikoApi\Entities\Type\DateTime;
 
 /**
- * Class OrderInfo
- * @package KMA\IikoApi\Entities
+ * Описание заказа
  * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.a9h7fjnc62l1
  */
 class OrderInfo extends Entity
 {
-
     /**
      * @var string Guid Идентификатор заказа
      */
@@ -24,12 +22,12 @@ class OrderInfo extends Entity
     public ?string $customerId = null;
 
     /**
-     * @var Customer|null Клиент доставки
+     * @var \KMA\IikoApi\Entities\Customer|null Клиент доставки
      */
     public ?Customer $customer = null;
 
     /**
-     * @var Address|null Адрес доставки
+     * @var \KMA\IikoApi\Entities\Address|null Адрес доставки
      */
     public ?Address $address = null;
 
@@ -83,7 +81,7 @@ class OrderInfo extends Entity
     public ?string $customerPhone = null;
 
     /**
-     * @var DeliveryCancelCauseInfo|null Причина отмены доставки
+     * @var \KMA\IikoApi\Entities\DeliveryCancelCauseInfo|null Причина отмены доставки
      */
     public ?DeliveryCancelCauseInfo $deliveryCancelCause = null;
 
@@ -93,57 +91,57 @@ class OrderInfo extends Entity
     public ?string $deliveryCancelComment = null;
 
     /**
-     * @var OrderCourierInfo|null Информация о курьере заказа
+     * @var \KMA\IikoApi\Entities\OrderCourierInfo|null Информация о курьере заказа
      */
     public ?OrderCourierInfo $courierInfo = null;
 
     /**
-     * @var CoordinatesInfo|null Координаты адреса доставочного заказа
+     * @var \KMA\IikoApi\Entities\CoordinatesInfo|null Координаты адреса доставочного заказа
      */
     public ?CoordinatesInfo $orderLocationInfo = null;
 
     /**
-     * @var DateTime|null Дата, к которой нужно доставить заказ
+     * @var \KMA\IikoApi\Entities\Type\DateTime|null Дата, к которой нужно доставить заказ
      */
     public ?DateTime $deliveryDate = null;
 
     /**
-     * @var DateTime|null Фактическое время доставки
+     * @var \KMA\IikoApi\Entities\Type\DateTime|null Фактическое время доставки
      */
     public ?DateTime $actualTime = null;
 
     /**
-     * @var DateTime|null Время печати накладной (время пречека)
+     * @var \KMA\IikoApi\Entities\Type\DateTime|null Время печати накладной (время пречека)
      */
     public ?DateTime $billTime = null;
 
     /**
-     * @var DateTime|null Время отмены доставки
+     * @var \KMA\IikoApi\Entities\Type\DateTime|null Время отмены доставки
      */
     public ?DateTime $cancelTime = null;
 
     /**
-     * @var DateTime|null Время закрытия доставки
+     * @var \KMA\IikoApi\Entities\Type\DateTime|null Время закрытия доставки
      */
     public ?DateTime $closeTime = null;
 
     /**
-     * @var DateTime|null Время подтверждения доставки
+     * @var \KMA\IikoApi\Entities\Type\DateTime|null Время подтверждения доставки
      */
     public ?DateTime $confirmTime = null;
 
     /**
-     * @var DateTime|null Время создания доставки
+     * @var \KMA\IikoApi\Entities\Type\DateTime|null Время создания доставки
      */
     public ?DateTime $createdTime = null;
 
     /**
-     * @var DateTime|null Время сервисной печати
+     * @var \KMA\IikoApi\Entities\Type\DateTime|null Время сервисной печати
      */
     public ?DateTime $printTime = null;
 
     /**
-     * @var DateTime|null Время отправки доставки
+     * @var \KMA\IikoApi\Entities\Type\DateTime|null Время отправки доставки
      */
     public ?DateTime $sendTime = null;
 
@@ -153,22 +151,22 @@ class OrderInfo extends Entity
     public ?string $comment = null;
 
     /**
-     * @var DeliveryProblemInfo|null Проблема доставки
+     * @var \KMA\IikoApi\Entities\DeliveryProblemInfo|null Проблема доставки
      */
     public ?DeliveryProblemInfo $problem = null;
 
     /**
-     * @var OrganizationUser|null Оператор, принявший заказ
+     * @var \KMA\IikoApi\Entities\OrganizationUser|null Оператор, принявший заказ
      */
     public ?OrganizationUser $operator = null;
 
     /**
-     * @var ConceptionInfo|null Концепция
+     * @var \KMA\IikoApi\Entities\ConceptionInfo|null Концепция
      */
     public ?ConceptionInfo $conception = null;
 
     /**
-     * @var MarketingSourceInfo|null Маркетинговый источник
+     * @var \KMA\IikoApi\Entities\MarketingSourceInfo|null Маркетинговый источник
      */
     public ?MarketingSourceInfo $marketingSource = null;
 
@@ -193,32 +191,32 @@ class OrderInfo extends Entity
     public ?string $iikoCard5Coupon = null;
 
     /**
-     * @var OrderItem[]|null Позиции заказа
+     * @var \KMA\IikoApi\Entities\OrderItem[]|null Позиции заказа
      */
     public ?array $items = null;
 
     /**
-     * @var DeliveryOrderGuest[]|null Гости заказа
+     * @var \KMA\IikoApi\Entities\DeliveryOrderGuest[]|null Гости заказа
      */
     public ?array $guests = null;
 
     /**
-     * @var PaymentItem[]|null Оплаты доставки
+     * @var \KMA\IikoApi\Entities\PaymentItem[]|null Оплаты доставки
      */
     public ?array $payments = null;
 
     /**
-     * @var OrderTypeInfo|null Тип заказа
+     * @var \KMA\IikoApi\Entities\OrderTypeInfo|null Тип заказа
      */
     public ?OrderTypeInfo $orderType = null;
 
     /**
-     * @var DeliveryTerminalInfo|null Доставочный терминал
+     * @var \KMA\IikoApi\Entities\DeliveryTerminalInfo|null Доставочный терминал
      */
     public ?DeliveryTerminalInfo $deliveryTerminal = null;
 
     /**
-     * @var DiscountInfo[]|null Скидки
+     * @var \KMA\IikoApi\Entities\DiscountInfo[]|null Скидки
      */
     public ?array $discounts = null;
 
@@ -228,7 +226,7 @@ class OrderInfo extends Entity
     public ?string $customData = null;
 
     /**
-     * @var DeliveryOpinion|null Отзывы клиента о заказе
+     * @var \KMA\IikoApi\Entities\DeliveryOpinion|null Отзывы клиента о заказе
      */
     public ?DeliveryOpinion $opinion = null;
 }

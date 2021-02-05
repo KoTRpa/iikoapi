@@ -1,17 +1,15 @@
 <?php
 
-
 namespace KMA\IikoApi\Entities\Request;
 
+use KMA\IikoApi\Entity;
+
 /**
- * Class SetOrderDeliveredRequest
- * @package KMA\IikoApi\Entities\Request
  * Запрос для изменения статуса заказа курьером, отмечающий его как доставленный или “не доставленный”.
  * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.ycf8be7klmf7
  */
-class SetOrderDeliveredRequest extends \KMA\IikoApi\Entities\Entity
+class SetOrderDeliveredRequest extends Entity
 {
-
     /**
      * @var string Guid Id курьера
      */

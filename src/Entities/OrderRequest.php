@@ -1,17 +1,13 @@
 <?php
-/**
- * Class OrderRequest
- * @package KMA\IikoApi\Entities
- * @url https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.vw4ejhcm2zu9\
- *
- * Required fields:
- * - $organization
- * - $order
- * - $customer
- */
 
 namespace KMA\IikoApi\Entities;
 
+use KMA\IikoApi\Entity;
+
+/**
+ * OrderRequest
+ * @url https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.vw4ejhcm2zu9
+ */
 class OrderRequest extends Entity
 {
     /**
@@ -28,12 +24,12 @@ class OrderRequest extends Entity
     public ?string $deliveryTerminalId = null;
 
     /**
-     * @var Customer Заказчик
+     * @var \KMA\IikoApi\Entities\Customer Заказчик
      */
     public Customer $customer;
 
     /**
-     * @var Order Заказ
+     * @var \KMA\IikoApi\Entities\Order Заказ
      */
     public Order $order;
 
@@ -72,23 +68,4 @@ class OrderRequest extends Entity
      * Получить можно из iikoCardAPI методами "get_customer_by_phone" или "get_customer_by_card"
      */
     public ?string $referrerId = null;
-
-    /**
-     * TODO: make required props validation universal
-     * @throws \InvalidArgumentException
-     */
-    public function validate()
-    {
-        if (!$this->organization) {
-            throw new \InvalidArgumentException('Отсутствует идентификатор организации');
-        }
-
-        if (!$this->customer) {
-            throw new \InvalidArgumentException('Отсутствует информация о покупателе');
-        }
-
-        if (!$this->order) {
-            throw new \InvalidArgumentException('Отсутствует информация о заказе');
-        }
-    }
 }

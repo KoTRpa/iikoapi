@@ -1,14 +1,14 @@
 <?php
 
-
 namespace KMA\IikoApi\Entities\Request;
+
+use KMA\IikoApi\Entity;
 
 /**
  * Запрос для задания курьера заказу.
  * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.ys7y58lhh8mz
- * @package KMA\IikoApi\Entities\Request
  */
-class AssignCourierRequest extends \KMA\IikoApi\Entities\Entity
+class AssignCourierRequest extends Entity
 {
     /**
      * @var string Guid курьера

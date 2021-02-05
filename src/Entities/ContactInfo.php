@@ -1,14 +1,15 @@
 <?php
+
+namespace KMA\IikoApi\Entities;
+
+use KMA\IikoApi\Entity;
+
 /**
- * Class ContactInfo
- * @package KMA\IikoApi\Entities
+ * Контактная информация. (ApiCard)
  * @see https://docs.google.com/document/d/1kuhs94UV_0oUkI2CI3uOsNo_dydmh9Q0MFoDWmhzwxc/edit#heading=h.dxb1prml8roo
  *
  * @noinspection PhpUnused
  */
-
-namespace KMA\IikoApi\Entities;
-
 class ContactInfo extends Entity
 {
     /**

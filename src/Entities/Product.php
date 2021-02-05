@@ -1,14 +1,13 @@
 <?php
-/**
- * Class Product
- * @package KMA\IikoApi\Entities
- * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.d5wifi4jf2l2
- *
- * @noinspection PhpUnused
- */
 
 namespace KMA\IikoApi\Entities;
 
+use KMA\IikoApi\Entity;
+
+/**
+ * Продукт
+ * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.d5wifi4jf2l2
+ */
 class Product extends Entity
 {
     /**
@@ -42,7 +41,7 @@ class Product extends Entity
     public ?string $parentGroup = null;
 
     /**
-     * @var ImageInfo[]|null Описание картинок
+     * @var \KMA\IikoApi\Entities\ImageInfo[]|null Описание картинок
      */
     public ?array $images = null;
 
@@ -123,12 +122,12 @@ class Product extends Entity
     public ?bool $isIncludedInMenu = null;
 
     /**
-     * @var Modifier[]|null Одиночные модификаторы
+     * @var \KMA\IikoApi\Entities\Modifier[]|null Одиночные модификаторы
      */
     public ?array $modifiers = null;
 
     /**
-     * @var Modifier[]|null Групповые модификаторы
+     * @var \KMA\IikoApi\Entities\Modifier[]|null Групповые модификаторы
      */
     public ?array $groupModifiers = null;
 
@@ -178,7 +177,7 @@ class Product extends Entity
     public ?array $prohibitedToSaleOn = null;
 
     /**
-     * @var CustomTerminalPriceInfo[]|null Список терминалов, на которых цена продукта отличается от стандартной и цен на них.
+     * @var \KMA\IikoApi\Entities\CustomTerminalPriceInfo[]|null Список терминалов, на которых цена продукта отличается от стандартной и цен на них.
      */
     public ?array $differentPricesOn = null;
 

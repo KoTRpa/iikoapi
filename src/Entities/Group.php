@@ -1,14 +1,13 @@
 <?php
-/**
- * Class Group
- * @package KMA\IikoApi\Entities
- * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.s9q6w0yk20hl
- *
- * @noinspection PhpUnused
- */
 
 namespace KMA\IikoApi\Entities;
 
+use KMA\IikoApi\Entity;
+
+/**
+ * Группа
+ * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.s9q6w0yk20hl
+ */
 class Group extends Entity
 {
     /**
@@ -42,7 +41,7 @@ class Group extends Entity
     public ?string $parentGroup = null;
 
     /**
-     * @var ImageInfo[]|null URLs картинок
+     * @var \KMA\IikoApi\Entities\ImageInfo[]|null URLs картинок
      */
     public ?array $images = null;
 

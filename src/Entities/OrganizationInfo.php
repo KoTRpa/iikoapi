@@ -1,14 +1,13 @@
 <?php
-/**
- * Class OrganizationInfo
- * @package KMA\IikoApi\Entities
- * @see https://docs.google.com/document/d/1kuhs94UV_0oUkI2CI3uOsNo_dydmh9Q0MFoDWmhzwxc/edit#heading=h.oukh8de96nr1
- *
- * @noinspection PhpUnused
- */
 
 namespace KMA\IikoApi\Entities;
 
+use KMA\IikoApi\Entity;
+
+/**
+ * Описание организации (Ресторан, AЗС, Гостиница, ...) (IikoCard)
+ * @see https://docs.google.com/document/d/1kuhs94UV_0oUkI2CI3uOsNo_dydmh9Q0MFoDWmhzwxc/edit#heading=h.oukh8de96nr1
+ */
 class OrganizationInfo extends Entity
 {
 
@@ -33,7 +32,7 @@ class OrganizationInfo extends Entity
     public ?string $logo = null;
 
     /**
-     * @var ContactInfo|null Контактная информация в свободной форме.
+     * @var \KMA\IikoApi\Entities\ContactInfo|null Контактная информация в свободной форме.
      */
     public ?ContactInfo $contact = null;
 

@@ -1,14 +1,14 @@
 <?php
-/**
- * Class Nomenclature
- * @package KMA\IikoApi\Entities
- * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.df9hdpryg7ga
- *
- * @noinspection PhpUnused
- */
 
 namespace KMA\IikoApi\Entities;
 
+use KMA\IikoApi\Entity;
+
+/**
+ * Номенклатура
+ * @package KMA\IikoApi\Entities
+ * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.df9hdpryg7ga
+ */
 class Nomenclature extends Entity
 {
     /**

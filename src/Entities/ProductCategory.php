@@ -1,14 +1,13 @@
 <?php
-/**
- * Class ProductCategory
- * @package KMA\IikoApi\Entities
- * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.y928h39k1gi9
- *
- * @noinspection PhpUnused
- */
 
 namespace KMA\IikoApi\Entities;
 
+use KMA\IikoApi\Entity;
+
+/**
+ * Категория продукта
+ * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.y928h39k1gi9
+ */
 class ProductCategory extends Entity
 {
     /**

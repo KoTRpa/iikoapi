@@ -2,24 +2,23 @@
 
 namespace KMA\IikoApi\Entities;
 
+use KMA\IikoApi\Entity;
+
 class PaymentItem extends Entity
 {
     /**
      * @var float Сумма к оплате
-     *  - required
      */
     public float $sum;
 
     /**
      * @var PaymentType Тип оплаты
      * (одно из полей: id, code является обязательным)
-     *  - required
      */
     public PaymentType $paymentType;
 
     /**
      * @var bool Является ли позиция оплаты проведенной
-     *  - required
      */
     public bool $isProcessedExternally;
 

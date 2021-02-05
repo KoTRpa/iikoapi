@@ -2,6 +2,12 @@
 
 namespace KMA\IikoApi\Entities;
 
+use KMA\IikoApi\Entity;
+
+/**
+ * Элемент заказа
+ * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.hmdgnvvxsxzp
+ */
 class OrderItem extends Entity
 {
     /**
@@ -11,7 +17,6 @@ class OrderItem extends Entity
 
     /**
      * @var string|null Артикул товара
-     * - required
      */
     public ?string $code = null;
 
@@ -22,7 +27,6 @@ class OrderItem extends Entity
 
     /**
      * @var float Количество
-     * - max 1000
      */
     public float $amount;
 
@@ -39,8 +43,7 @@ class OrderItem extends Entity
     public ?string $category = null;
 
     /**
-     * @var array|null Модификаторы
-     * OrderItemModifier[]
+     * @var \KMA\IikoApi\Entities\OrderItemModifier[]|null Модификаторы
      */
     public ?array $modifiers = null;
 

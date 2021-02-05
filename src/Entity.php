@@ -1,6 +1,6 @@
 <?php
 
-namespace KMA\IikoApi\Entities;
+namespace KMA\IikoApi;
 
 use Exception;
 use JsonException;

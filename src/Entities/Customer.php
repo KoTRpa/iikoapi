@@ -2,16 +2,13 @@
 
 namespace KMA\IikoApi\Entities;
 
+use KMA\IikoApi\Entity;
+
 use KMA\IikoApi\Entities\Type\ShortDateTime;
 
 /**
- * Class Customer
- * @package KMA\IikoApi\Entities
+ * Заказчик
  * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.yzwu6ehu8367
- *
- * Required fields
- * - $name
- * - $phone
  */
 class Customer extends Entity
 {

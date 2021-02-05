@@ -1,26 +1,27 @@
 <?php
 
-
 namespace KMA\IikoApi\Entities;
 
+use KMA\IikoApi\Entity;
 
+/**
+ * Модификатор элемента заказа.
+ * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.8zy928kjgply
+ */
 class OrderItemModifier extends Entity
 {
     /**
      * @var string Guid Идентификатор продукта
-     *  - required
      */
     public string $id;
 
     /**
      * @var string Название продукта
-     *  - required
      */
     public string $name;
 
     /**
      * @var float Количество
-     *  - required
      */
     public float $amount;
 
