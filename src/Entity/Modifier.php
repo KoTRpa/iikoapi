@@ -9,7 +9,7 @@
 
 namespace KMA\IikoApi\Entity;
 
-class Modifier extends Base
+class Modifier extends Entity
 {
     /**
      * @var string|null Guid Идентификатор модификатора. Идентификатор продукта для одиночного модификатора и идентификатор группы - для группового.

@@ -9,7 +9,7 @@
 
 namespace KMA\IikoApi\Entity;
 
-class ImageInfo extends Base
+class ImageInfo extends Entity
 {
 
     /**

@@ -9,7 +9,7 @@
 
 namespace KMA\IikoApi\Entity;
 
-class Nomenclature extends Base
+class Nomenclature extends Entity
 {
     /**
      * @var \KMA\IikoApi\Entity\Group[] Группы

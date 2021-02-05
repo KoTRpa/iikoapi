@@ -8,7 +8,7 @@ namespace KMA\IikoApi\Entity;
  * @package KMA\IikoApi\Entity
  * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.utu75qsngtx6
  */
-class MarketingSourceInfo extends Base
+class MarketingSourceInfo extends Entity
 {
     /**
      * @var string GUID Идентификатор источника

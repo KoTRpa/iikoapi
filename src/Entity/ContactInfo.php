@@ -9,7 +9,7 @@
 
 namespace KMA\IikoApi\Entity;
 
-class ContactInfo extends Base
+class ContactInfo extends Entity
 {
     /**
      * @var string|null Телефон

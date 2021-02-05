@@ -7,7 +7,7 @@ namespace KMA\IikoApi\Entity;
  * Город с коллекцией улиц
  * @package KMA\IikoApi\Entity
  */
-class CityWithStreets extends Base
+class CityWithStreets extends Entity
 {
     /**
      * @var City Ссылка на город

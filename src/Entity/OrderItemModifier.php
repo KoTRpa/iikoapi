@@ -4,7 +4,7 @@
 namespace KMA\IikoApi\Entity;
 
 
-class OrderItemModifier extends Base
+class OrderItemModifier extends Entity
 {
     /**
      * @var string Guid Идентификатор продукта

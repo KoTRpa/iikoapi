@@ -8,7 +8,7 @@ namespace KMA\IikoApi\Entity;
  * @package KMA\IikoApi\Entity
  * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.swxkcwxen9vh
  */
-class DeliveryOrderGuest extends Base
+class DeliveryOrderGuest extends Entity
 {
     /**
      * @var string GUID Идентификатор гостя

@@ -8,7 +8,7 @@ namespace KMA\IikoApi\Entity;
  * @package KMA\IikoApi\Entity
  * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.8kq27v86l33n
  */
-class OpeningHours extends Base
+class OpeningHours extends Entity
 {
     /** @var int Номер для недели, для которого указывается время работы. Нумерация начинается c 0, которому соответствует понедельник */
     public int $dayOfWeek;

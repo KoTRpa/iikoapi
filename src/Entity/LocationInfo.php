@@ -10,7 +10,7 @@ use KMA\IikoApi\Entity\Type\DateTime;
  * @package KMA\IikoApi\Entity
  * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.f2gugbpuryn
  */
-class LocationInfo extends Base
+class LocationInfo extends Entity
 {
     /**
      * @var float Широта координаты курьера

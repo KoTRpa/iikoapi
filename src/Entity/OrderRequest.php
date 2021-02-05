@@ -12,7 +12,7 @@
 
 namespace KMA\IikoApi\Entity;
 
-class OrderRequest extends Base
+class OrderRequest extends Entity
 {
     /**
      * @var string Идентификатор ресторана.

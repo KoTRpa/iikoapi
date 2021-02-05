@@ -9,7 +9,7 @@
 
 namespace KMA\IikoApi\Entity;
 
-class Product extends Base
+class Product extends Entity
 {
     /**
      * @var string|null Guid Уникальный идентификатор

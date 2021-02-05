@@ -7,7 +7,7 @@ use JsonException;
 
 use KMA\IikoApi\Entity\Concerns;
 
-abstract class Base implements \JsonSerializable
+abstract class Entity implements \JsonSerializable
 {
     use Concerns\HasAttributes;
 

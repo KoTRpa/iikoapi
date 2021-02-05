@@ -8,7 +8,7 @@ namespace KMA\IikoApi\Entity\Request;
  * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.ys7y58lhh8mz
  * @package KMA\IikoApi\Entity\Request
  */
-class AssignCourierRequest extends \KMA\IikoApi\Entity\Base
+class AssignCourierRequest extends \KMA\IikoApi\Entity\Entity
 {
     /**
      * @var string Guid курьера

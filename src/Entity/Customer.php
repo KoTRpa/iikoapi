@@ -13,7 +13,7 @@ use KMA\IikoApi\Entity\Type\ShortDateTime;
  * - $name
  * - $phone
  */
-class Customer extends Base
+class Customer extends Entity
 {
     /**
      * @var string|null Идентификатор

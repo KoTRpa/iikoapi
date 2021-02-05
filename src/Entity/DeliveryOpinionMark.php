@@ -8,7 +8,7 @@ namespace KMA\IikoApi\Entity;
  * @package KMA\IikoApi\Entity
  * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.nu5cs954om3f
  */
-class DeliveryOpinionMark extends Base
+class DeliveryOpinionMark extends Entity
 {
     /**
      * @var string GUID вопроса

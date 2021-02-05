@@ -7,7 +7,7 @@ namespace KMA\IikoApi\Entity;
  * Город
  * @package KMA\IikoApi\Entity
  */
-class City extends Base
+class City extends Entity
 {
     /**
      * @var string GUID Уникальный идентификатор

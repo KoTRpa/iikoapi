@@ -14,7 +14,7 @@ namespace KMA\IikoApi\Entity;
  * @package KMA\IikoApi\Entity
  * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.3xar1hixl2n2
  */
-class OrganizationUser extends Base
+class OrganizationUser extends Entity
 {
     /**
      * @var string Guid Идентификатор сотрудника

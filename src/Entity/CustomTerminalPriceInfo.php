@@ -9,7 +9,7 @@
 
 namespace KMA\IikoApi\Entity;
 
-class CustomTerminalPriceInfo extends Base
+class CustomTerminalPriceInfo extends Entity
 {
     /**
      * @var string|null Guid Идентификатор терминала, на котором цена отличается от стандартной

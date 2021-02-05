@@ -10,7 +10,7 @@ use KMA\IikoApi\Entity\OpeningHours;
  * @package KMA\IikoApi\Entity
  * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.blcnw751j0yr
  */
-class DeliveryTerminal extends Base
+class DeliveryTerminal extends Entity
 {
     /**
      * @var string GUID Идентификатор организации, к которой относится доставочный терминал

@@ -2,7 +2,7 @@
 
 namespace KMA\IikoApi\Entity;
 
-class Address extends Base
+class Address extends Entity
 {
     /**
      * @var string Наименование города

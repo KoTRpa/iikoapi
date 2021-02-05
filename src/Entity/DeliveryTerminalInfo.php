@@ -8,7 +8,7 @@ namespace KMA\IikoApi\Entity;
  * @package KMA\IikoApi\Entity
  * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.m1n1hoethjnt
  */
-class DeliveryTerminalInfo extends Base
+class DeliveryTerminalInfo extends Entity
 {
     /**
      * @var string GUID Идентификатор доставочного терминала

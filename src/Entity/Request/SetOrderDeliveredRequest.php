@@ -9,7 +9,7 @@ namespace KMA\IikoApi\Entity\Request;
  * Запрос для изменения статуса заказа курьером, отмечающий его как доставленный или “не доставленный”.
  * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.ycf8be7klmf7
  */
-class SetOrderDeliveredRequest extends \KMA\IikoApi\Entity\Base
+class SetOrderDeliveredRequest extends \KMA\IikoApi\Entity\Entity
 {
 
     /**

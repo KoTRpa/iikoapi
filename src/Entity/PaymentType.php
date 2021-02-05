@@ -4,7 +4,7 @@
 namespace KMA\IikoApi\Entity;
 
 
-class PaymentType extends Base
+class PaymentType extends Entity
 {
     /**
      * @var string|null Guid Идентификатор типа оплаты

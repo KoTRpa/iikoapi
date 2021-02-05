@@ -2,7 +2,7 @@
 
 namespace KMA\IikoApi\Entity;
 
-class OrderItem extends Base
+class OrderItem extends Entity
 {
     /**
      * @var string|null Guid Идентификатор продукта

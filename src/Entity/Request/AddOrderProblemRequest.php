@@ -8,7 +8,7 @@ namespace KMA\IikoApi\Entity\Request;
  * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.coq3d1b0r56h
  * @package KMA\IikoApi\Entity\Request
  */
-class AddOrderProblemRequest extends \KMA\IikoApi\Entity\Base
+class AddOrderProblemRequest extends \KMA\IikoApi\Entity\Entity
 {
     /**
      * @var string Guid Id доставочного заказа

@@ -8,7 +8,7 @@ namespace KMA\IikoApi\Entity;
  * @package KMA\IikoApi\Entity
  * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.fpomjjbi0dh5
  */
-class OrderCourierInfo extends Base
+class OrderCourierInfo extends Entity
 {
     /**
      * @var string GUID Идентификатор курьера

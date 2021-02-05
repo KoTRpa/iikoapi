@@ -9,7 +9,7 @@
 
 namespace KMA\IikoApi\Entity;
 
-class OrganizationInfo extends Base
+class OrganizationInfo extends Entity
 {
 
     /**

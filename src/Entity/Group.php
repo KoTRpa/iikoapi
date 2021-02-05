@@ -9,7 +9,7 @@
 
 namespace KMA\IikoApi\Entity;
 
-class Group extends Base
+class Group extends Entity
 {
     /**
      * @var string|null Guid Уникальный идентификатор

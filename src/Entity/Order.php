@@ -13,7 +13,7 @@ namespace KMA\IikoApi\Entity;
  * - $isSelfService;
  * - $address;
  */
-class Order extends Base
+class Order extends Entity
 {
     /**
      * @var string|null Идентификатор заказа

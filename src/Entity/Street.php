@@ -2,7 +2,7 @@
 
 namespace KMA\IikoApi\Entity;
 
-class Street extends Base
+class Street extends Entity
 {
     /**
      * @var string Уникальный идентификатор

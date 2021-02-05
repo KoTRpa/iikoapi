@@ -2,7 +2,7 @@
 
 namespace KMA\IikoApi\Entity;
 
-class PaymentItem extends Base
+class PaymentItem extends Entity
 {
     /**
      * @var float Сумма к оплате
