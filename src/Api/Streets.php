@@ -3,7 +3,7 @@
 
 namespace KMA\IikoApi\Api;
 
-use KMA\IikoApi\Entity\Street;
+use KMA\IikoApi\Entities\Street;
 use KMA\IikoApi\Exceptions\IikoApiException;
 
 use KMA\IikoApi\Iiko;
@@ -23,7 +23,7 @@ trait Streets
     /**
      * @param string $orgId iiko organization id
      * @param string $cityId
-     * @return Street[] KMA\IikoApi\Entity\Nomenclature
+     * @return Street[] KMA\IikoApi\Entities\Nomenclature
      * @throws IikoApiException
      * @throws \JsonMapper_Exception
      */

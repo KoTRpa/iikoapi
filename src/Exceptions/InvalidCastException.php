@@ -7,7 +7,7 @@ use RuntimeException;
 class InvalidCastException extends RuntimeException
 {
     /**
-     * The name of the affected Entity.
+     * The name of the affected Entities.
      *
      * @var string
      */

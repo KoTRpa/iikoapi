@@ -3,7 +3,7 @@
 
 namespace KMA\IikoApi\Api;
 
-use KMA\IikoApi\Entity\Nomenclature as NomenclatureEntity;
+use KMA\IikoApi\Entities\Nomenclature as NomenclatureEntity;
 use KMA\IikoApi\Exceptions\IikoApiException;
 
 use KMA\IikoApi\Iiko;
@@ -22,7 +22,7 @@ trait Nomenclature
 {
     /**
      * @param string $orgId iiko organization id
-     * @return NomenclatureEntity KMA\IikoApi\Entity\Nomenclature
+     * @return NomenclatureEntity KMA\IikoApi\Entities\Nomenclature
      * @throws \JsonMapper_Exception
      * @throws IikoApiException
      */

@@ -3,13 +3,13 @@
 
 namespace KMA\IikoApi\Api;
 
-use KMA\IikoApi\Entity\Enum\DeliveryStatus;
-use KMA\IikoApi\Entity\OrderInfo;
-use KMA\IikoApi\Entity\OrderRequest;
-use KMA\IikoApi\Entity\Request\AddOrderProblemRequest;
-use KMA\IikoApi\Entity\Request\AssignCourierRequest;
-use KMA\IikoApi\Entity\Request\SetOrderDeliveredRequest;
-use KMA\IikoApi\Entity\Type\TimeSpan;
+use KMA\IikoApi\Entities\Enum\DeliveryStatus;
+use KMA\IikoApi\Entities\OrderInfo;
+use KMA\IikoApi\Entities\OrderRequest;
+use KMA\IikoApi\Entities\Request\AddOrderProblemRequest;
+use KMA\IikoApi\Entities\Request\AssignCourierRequest;
+use KMA\IikoApi\Entities\Request\SetOrderDeliveredRequest;
+use KMA\IikoApi\Entities\Type\TimeSpan;
 use KMA\IikoApi\Exceptions\IikoApiException;
 
 use KMA\IikoApi\Exceptions\OrderInfoException;
@@ -259,7 +259,7 @@ trait Order
      * Отметить заказ доставленным или недоставленным.
      * post
      * @param string $organization
-     * @param \KMA\IikoApi\Entity\Request\SetOrderDeliveredRequest $request
+     * @param \KMA\IikoApi\Entities\Request\SetOrderDeliveredRequest $request
      * @param TimeSpan|null $timeout
      * @throws IikoApiException
      * @throws \KMA\IikoApi\Exceptions\IikoResponseException

@@ -3,8 +3,8 @@
 
 namespace KMA\IikoApi\Api;
 
-use KMA\IikoApi\Entity\OrganizationUser;
-use KMA\IikoApi\Entity\PaymentType;
+use KMA\IikoApi\Entities\OrganizationUser;
+use KMA\IikoApi\Entities\PaymentType;
 use KMA\IikoApi\Exceptions\IikoApiException;
 
 use KMA\IikoApi\Iiko;
@@ -68,7 +68,7 @@ trait RmsSettings
      * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.c88aygwtq5iv
      *
      * @param string $organization
-     * @return \KMA\IikoApi\Entity\PaymentType[]
+     * @return \KMA\IikoApi\Entities\PaymentType[]
      * @throws IikoApiException
      * @throws \JsonMapper_Exception
      */

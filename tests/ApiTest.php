@@ -3,20 +3,20 @@
 namespace KMA\IikoApi\Tests;
 
 
-use KMA\IikoApi\Entity\OrderInfo;
-use KMA\IikoApi\Entity\Request\AddOrderProblemRequest;
-use KMA\IikoApi\Entity\Request\AssignCourierRequest;
-use KMA\IikoApi\Entity\Type\DateTime;
+use KMA\IikoApi\Entities\OrderInfo;
+use KMA\IikoApi\Entities\Request\AddOrderProblemRequest;
+use KMA\IikoApi\Entities\Request\AssignCourierRequest;
+use KMA\IikoApi\Entities\Type\DateTime;
 use KMA\IikoApi\Exceptions\OrderInfoException;
 use PHPUnit\Framework\TestCase;
 
 use KMA\IikoApi\Iiko;
 
-use KMA\IikoApi\Entity\Address;
-use KMA\IikoApi\Entity\Customer;
-use KMA\IikoApi\Entity\Order;
-use KMA\IikoApi\Entity\OrderItem;
-use KMA\IikoApi\Entity\OrderRequest;
+use KMA\IikoApi\Entities\Address;
+use KMA\IikoApi\Entities\Customer;
+use KMA\IikoApi\Entities\Order;
+use KMA\IikoApi\Entities\OrderItem;
+use KMA\IikoApi\Entities\OrderRequest;
 
 class ApiTest extends TestCase
 {
@@ -32,7 +32,7 @@ class ApiTest extends TestCase
     public function testNomenclature(): void
     {
         $this->assertInstanceOf(
-            \KMA\IikoApi\Entity\Nomenclature::class,
+            \KMA\IikoApi\Entities\Nomenclature::class,
             $this->iiko->nomenclature($this->orgId)
         );
     }
@@ -43,7 +43,7 @@ class ApiTest extends TestCase
         $this->assertIsArray($orgList);
         foreach ($orgList as $orgInfo) {
             $this->assertInstanceOf(
-                \KMA\IikoApi\Entity\OrganizationInfo::class,
+                \KMA\IikoApi\Entities\OrganizationInfo::class,
                 $orgInfo
             );
         }
@@ -125,7 +125,7 @@ class ApiTest extends TestCase
         $this->assertIsArray($orders);
         foreach ($orders as $order) {
             $this->assertInstanceOf(
-                \KMA\IikoApi\Entity\OrderInfo::class,
+                \KMA\IikoApi\Entities\OrderInfo::class,
                 $order
             );
         }
@@ -145,7 +145,7 @@ class ApiTest extends TestCase
             $orderId
         );
         $this->assertInstanceOf(
-            \KMA\IikoApi\Entity\OrderInfo::class,
+            \KMA\IikoApi\Entities\OrderInfo::class,
             $order
         );
     }
@@ -172,7 +172,7 @@ class ApiTest extends TestCase
         $this->assertIsArray($streets);
         foreach ($streets as $street) {
             $this->assertInstanceOf(
-                \KMA\IikoApi\Entity\Street::class,
+                \KMA\IikoApi\Entities\Street::class,
                 $street
             );
         }
@@ -184,7 +184,7 @@ class ApiTest extends TestCase
         $this->assertIsArray($cities);
         foreach ($cities as $city) {
             $this->assertInstanceOf(
-                \KMA\IikoApi\Entity\CityWithStreets::class,
+                \KMA\IikoApi\Entities\CityWithStreets::class,
                 $city
             );
         }
@@ -196,7 +196,7 @@ class ApiTest extends TestCase
         $this->assertIsArray($cities);
         foreach ($cities as $city) {
             $this->assertInstanceOf(
-                \KMA\IikoApi\Entity\City::class,
+                \KMA\IikoApi\Entities\City::class,
                 $city
             );
         }
@@ -208,7 +208,7 @@ class ApiTest extends TestCase
         $this->assertIsArray($couriers);
         foreach ($couriers as $courier) {
             $this->assertInstanceOf(
-                \KMA\IikoApi\Entity\OrganizationUser::class,
+                \KMA\IikoApi\Entities\OrganizationUser::class,
                 $courier
             );
         }
@@ -220,7 +220,7 @@ class ApiTest extends TestCase
         $this->assertIsArray($items);
         foreach ($items as $item) {
             $this->assertInstanceOf(
-                \KMA\IikoApi\Entity\PaymentType::class,
+                \KMA\IikoApi\Entities\PaymentType::class,
                 $item
             );
         }
@@ -281,7 +281,7 @@ class ApiTest extends TestCase
         $this->assertIsArray($items);
         foreach ($items as $item) {
             $this->assertInstanceOf(
-                \KMA\IikoApi\Entity\DeliveryTerminal::class,
+                \KMA\IikoApi\Entities\DeliveryTerminal::class,
                 $item
             );
         }
@@ -299,7 +299,7 @@ class ApiTest extends TestCase
     //     $couriers = $this->iiko->getCouriers($this->orgId);
     //     $courier = reset($couriers);
     //
-    //     $request = new \KMA\IikoApi\Entity\Request\SetOrderDeliveredRequest();
+    //     $request = new \KMA\IikoApi\Entities\Request\SetOrderDeliveredRequest();
     //     $request->orderId = $lastOrder->orderId;
     //     $request->courierId = $courier->id;
     //     $request->delivered = true;

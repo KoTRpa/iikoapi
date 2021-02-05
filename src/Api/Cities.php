@@ -3,8 +3,8 @@
 
 namespace KMA\IikoApi\Api;
 
-use KMA\IikoApi\Entity\City;
-use KMA\IikoApi\Entity\CityWithStreets;
+use KMA\IikoApi\Entities\City;
+use KMA\IikoApi\Entities\CityWithStreets;
 use KMA\IikoApi\Exceptions\IikoApiException;
 
 use KMA\IikoApi\Iiko;

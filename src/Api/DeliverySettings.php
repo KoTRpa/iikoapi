@@ -8,7 +8,7 @@ use KMA\IikoApi\Traits\Http;
 use JsonMapper;
 use KMA\IikoApi\Exceptions\IikoApiException;
 
-use KMA\IikoApi\Entity\DeliveryTerminal;
+use KMA\IikoApi\Entities\DeliveryTerminal;
 
 /**
  * Trait DeliverySettings
@@ -25,7 +25,7 @@ trait DeliverySettings
      * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.kqcxqxlnde8c
      *
      * @param string $organization GUID организации
-     * @return \KMA\IikoApi\Entity\DeliveryTerminal[]
+     * @return \KMA\IikoApi\Entities\DeliveryTerminal[]
      * @throws \JsonMapper_Exception|\KMA\IikoApi\Exceptions\IikoApiException
      */
     public function getDeliveryTerminals(string $organization): array

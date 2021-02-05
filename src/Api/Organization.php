@@ -4,7 +4,7 @@
 namespace KMA\IikoApi\Api;
 
 use JsonMapper;
-use KMA\IikoApi\Entity\OrganizationInfo;
+use KMA\IikoApi\Entities\OrganizationInfo;
 use KMA\IikoApi\Exceptions\IikoApiException;
 use KMA\IikoApi\Iiko;
 use KMA\IikoApi\Traits\Http;

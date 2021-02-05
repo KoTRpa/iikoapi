@@ -5,9 +5,9 @@ namespace KMA\IikoApi\Tests;
 
 use PHPUnit\Framework\TestCase;
 
-use KMA\IikoApi\Entity\Enum\DeliveryStatus;
-use KMA\IikoApi\Entity\Enum\OrderStatus;
-use KMA\IikoApi\Entity\Enum\ru\OrderStatus as OrderStatusRU;
+use KMA\IikoApi\Entities\Enum\DeliveryStatus;
+use KMA\IikoApi\Entities\Enum\OrderStatus;
+use KMA\IikoApi\Entities\Enum\ru\OrderStatus as OrderStatusRU;
 
 class EnumTest extends TestCase
 {
