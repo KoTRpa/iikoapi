@@ -10,7 +10,10 @@ use Illuminate\Support\Collection as BaseCollection;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Date;
 
+use KMA\IikoApi\Contracts\CastsInboundAttributes;
+
 use InvalidArgumentException;
+use KMA\IikoApi\Exceptions\AttributeDoesntExistsException;
 use KMA\IikoApi\Exceptions\InvalidCastException;
 
 trait HasAttributes
@@ -55,6 +58,53 @@ trait HasAttributes
      */
     protected array $classCastCache = [];
 
+    /**
+     * Get an attribute from the entity.
+     *
+     * @param  string  $key
+     * @return mixed
+     *
+     * @throws \KMA\IikoApi\Exceptions\AttributeDoesntExistsException
+     */
+    public function getAttribute(string $key)
+    {
+        if (! $key) {
+            return null;
+        }
+
+        // If the attribute exists in the attribute array or has a "get" mutator we will
+        // get the attribute's value. Otherwise, we will proceed as if the developers
+        // are asking for a relationship's value. This covers both types of values.
+        if (array_key_exists($key, $this->attributes) ||
+            array_key_exists($key, $this->casts) ||
+            $this->isClassCastable($key)) {
+            return $this->getAttributeValue($key);
+        }
+
+        throw new AttributeDoesntExistsException(static::class, $key);
+    }
+
+    /**
+     * Get a plain attribute.
+     *
+     * @param  string  $key
+     * @return mixed
+     */
+    public function getAttributeValue(string $key)
+    {
+        return $this->transformValue($key, $this->getAttributeFromArray($key));
+    }
+
+    /**
+     * Get an attribute from the $attributes array.
+     *
+     * @param  string  $key
+     * @return mixed
+     */
+    protected function getAttributeFromArray(string $key)
+    {
+        return $this->getAttributes()[$key] ?? null;
+    }
 
     /**
      * Set a given attribute on the entity.
@@ -65,6 +115,12 @@ trait HasAttributes
      */
     public function setAttribute(string $key, $value)
     {
+        // Protecting entity from set non-existed attributes
+        // by checking [casts] attribute
+        if (! array_key_exists($key, $this->casts)) {
+            throw new AttributeDoesntExistsException(static::class, $key);
+        }
+
         // If an attribute is listed as a "date", we'll convert it from a DateTime
         // instance into a form proper for storage on the database tables using
         // the connection grammar's date format. We will auto set the values.
@@ -76,17 +132,6 @@ trait HasAttributes
             $this->setClassCastableAttribute($key, $value);
 
             return $this;
-        }
-
-        if ($this->isJsonCastable($key) && ! is_null($value)) {
-            $value = $this->castAttributeAsJson($key, $value);
-        }
-
-        // If this attribute contains a JSON ->, we'll set the proper value in the
-        // attribute's underlying array. This takes care of properly nesting an
-        // attribute in the array's value in the case of deeply nested items.
-        if (Str::contains($key, '->')) {
-            return $this->fillJsonAttribute($key, $value);
         }
 
         $this->attributes[$key] = $value;
@@ -143,6 +188,18 @@ trait HasAttributes
         return $value;
     }
 
+
+    /**
+     * Get all of the current attributes.
+     *
+     * @return array
+     */
+    public function getAttributes(): array
+    {
+        $this->mergeAttributesFromClassCasts();
+
+        return $this->attributes;
+    }
 
     /**
      * Get the casts array.
@@ -314,21 +371,9 @@ trait HasAttributes
      */
     protected function isClassCastable(string $key): bool
     {
-        if (! array_key_exists($key, $this->getCasts())) {
-            return false;
-        }
-
-        $castType = $this->parseCasterClass($this->getCasts()[$key]);
-
-        if (in_array($castType, static::$primitiveCastTypes)) {
-            return false;
-        }
-
-        if (class_exists($castType)) {
-            return true;
-        }
-
-        throw new InvalidCastException(static::class, $key, $castType);
+        return array_key_exists($key, $this->getCasts()) &&
+            class_exists($class = $this->parseCasterClass($this->getCasts()[$key])) &&
+            ! in_array($class, static::$primitiveCastTypes);
     }
 
 
@@ -390,23 +435,16 @@ trait HasAttributes
         if (is_null($value)) {
             $this->attributes = array_merge(
                 $this->attributes,
-                array_map(
-                    function () {}, // nulling values, but keeps keys
-                    $this->normalizeCastClassResponse($key, $caster->set(
-                        $this, $key, $this->{$key}, $this->attributes
-                    ))
-                )
+                [$key => null]
             );
         } else {
             $this->attributes = array_merge(
                 $this->attributes,
-                $this->normalizeCastClassResponse($key, $caster->set(
-                    $this, $key, $value, $this->attributes
-                ))
+                $this->normalizeCastClassResponse($key, $value)
             );
         }
 
-        if ($caster instanceof CastsInboundAttributes || ! is_object($value)) {
+        if (! is_object($value)) {
             unset($this->classCastCache[$key]);
         } else {
             $this->classCastCache[$key] = $value;
@@ -427,13 +465,36 @@ trait HasAttributes
         } else {
             $caster = $this->resolveCasterClass($key);
 
-            if (! is_object($value)) {
+            $value = $caster instanceof CastsInboundAttributes
+                ? $value
+                : $caster->get($this, $key, $value, $this->attributes);
+
+            if ($caster instanceof CastsInboundAttributes || ! is_object($value)) {
                 unset($this->classCastCache[$key]);
             } else {
                 $this->classCastCache[$key] = $value;
             }
 
             return $value;
+        }
+    }
+
+    /**
+     * Merge the cast class attributes back into the entity.
+     *
+     * @return void
+     */
+    protected function mergeAttributesFromClassCasts()
+    {
+        foreach ($this->classCastCache as $key => $value) {
+            $caster = $this->resolveCasterClass($key);
+
+            $this->attributes = array_merge(
+                $this->attributes,
+                $caster instanceof CastsInboundAttributes
+                    ? [$key => $value]
+                    : $this->normalizeCastClassResponse($key, $caster->set($this, $key, $value, $this->attributes))
+            );
         }
     }
 
@@ -482,5 +543,24 @@ trait HasAttributes
     protected function normalizeCastClassResponse(string $key, $value): array
     {
         return is_array($value) ? $value : [$key => $value];
+    }
+
+    /**
+     * Transform a raw model value using mutators, casts, etc.
+     *
+     * @param  string  $key
+     * @param  mixed  $value
+     * @return mixed
+     */
+    protected function transformValue(string $key, $value)
+    {
+        // If the attribute exists within the cast array, we will convert it to
+        // an appropriate native PHP type dependent upon the associated value
+        // given with the key in the pair. Dayle made this comment line up.
+        if ($this->hasCast($key)) {
+            return $this->castAttribute($key, $value);
+        }
+
+        return $value;
     }
 }

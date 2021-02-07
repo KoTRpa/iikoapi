@@ -2,53 +2,29 @@
 
 namespace KMA\IikoApi;
 
-use Exception;
-use JsonException;
+use ArrayAccess;
 
 use KMA\IikoApi\Concerns;
 
-abstract class Entity implements \JsonSerializable
+abstract class Entity implements ArrayAccess
 {
-    use Concerns\HasAttributes;
-
-    /**
-     * @var array decoded json
-     */
-    protected array $decoded = [];
+    use
+        Concerns\HasAttributes,
+        Concerns\FromJSON;
 
     /**
      * Create a new Entities instance.
      *
-     * @param  string  $json
+     * @param  null|string  $json
      * @return void
      * @throws \JsonException
      */
-    public function __construct(string $json)
+    public function __construct(?string $json = null)
     {
-        $attributes = $this->decode($json);
-        $this->fill($attributes);
-    }
-
-    /**
-     * Decode json from string
-     *
-     * @param string $json
-     * @param bool $asObject
-     * @return array
-     * @throws \JsonException
-     */
-    public function decode(string $json, bool $asObject = false): array
-    {
-        $data = json_decode($json, !$asObject);
-
-        if ($data === null && json_last_error() !== JSON_ERROR_NONE) {
-            throw new JsonException('Invalid JSON: ' . json_last_error_msg());
+        if (null !== $json) {
+            $attributes = $this->fromJson($json);
+            $this->fill($attributes);
         }
-
-        // Mostly for debugging purpose
-        $this->decoded = $data;
-
-        return $data;
     }
 
     /**
@@ -67,21 +43,92 @@ abstract class Entity implements \JsonSerializable
     }
 
     /**
-     * @return array
-     * @throws Exception
+     * Dynamically retrieve attributes on the model.
+     *
+     * @param  string  $key
+     * @return mixed
      */
-    public function jsonSerialize(): array
+    public function __get(string $key)
     {
-        return array_filter((array)$this, function ($el) {
-            return ($el !== null);
-        });
+        return $this->getAttribute($key);
     }
 
-    protected static function clear(array $data): array
+    /**
+     * Dynamically set attributes on the model.
+     *
+     * @param  string  $key
+     * @param  string  $value
+     * @return void
+     */
+    public function __set(string $key, string $value)
     {
-        return array_filter($data, function ($el) {
-            return ($el !== null);
-        });
+        $this->setAttribute($key, $value);
     }
 
+    /**
+     * Determine if the given attribute exists.
+     *
+     * @param  mixed  $offset
+     * @return bool
+     */
+    public function offsetExists($offset): bool
+    {
+        return ! is_null($this->getAttribute($offset));
+    }
+
+    /**
+     * Get the value for a given offset.
+     *
+     * @param  mixed  $offset
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return $this->getAttribute($offset);
+    }
+
+    /**
+     * Set the value for a given offset.
+     *
+     * @param  mixed  $offset
+     * @param  mixed  $value
+     * @return void
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->setAttribute($offset, $value);
+    }
+
+    /**
+     * Unset the value for a given offset.
+     *
+     * @param  mixed  $offset
+     * @return void
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->attributes[$offset]);
+    }
+
+    /**
+     * Determine if an attribute exists on the entity.
+     *
+     * @param  string  $key
+     * @return bool
+     */
+    public function __isset(string $key): bool
+    {
+        return $this->offsetExists($key);
+    }
+
+    /**
+     * Unset an attribute on the entity.
+     *
+     * @param  string  $key
+     * @return void
+     */
+    public function __unset(string $key)
+    {
+        $this->offsetUnset($key);
+    }
 }
