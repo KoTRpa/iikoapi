@@ -1,0 +1,8 @@
+{
+    "code": "213",
+    "description": null,
+    "httpStatusCode": 400,
+    "isIntegrationError": null,
+    "message": "Organization 4f969fbb-1bb9-11ea-80dd-d8d385655247 not found or kimchi_api_call have not access rights.",
+    "uiMessage": null
+}
