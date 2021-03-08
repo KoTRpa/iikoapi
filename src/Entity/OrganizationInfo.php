@@ -33,7 +33,7 @@ class OrganizationInfo extends Base
     public ?string $logo = null;
 
     /**
-     * @var ContactInfo|null Контактная информация в свободной форме.
+     * @var \KMA\IikoApi\Entity\ContactInfo|null Контактная информация в свободной форме.
      */
     public ?ContactInfo $contact = null;
 

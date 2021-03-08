@@ -21,7 +21,7 @@ class PaymentItem extends Base
     public float $sum;
 
     /**
-     * @var PaymentType Тип оплаты
+     * @var \KMA\IikoApi\Entity\PaymentType Тип оплаты
      * (одно из полей: id, code является обязательным)
      *  - required
      */

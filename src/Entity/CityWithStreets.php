@@ -10,12 +10,12 @@ namespace KMA\IikoApi\Entity;
 class CityWithStreets extends Base
 {
     /**
-     * @var City Ссылка на город
+     * @var \KMA\IikoApi\Entity\City Ссылка на город
      */
     public City $city;
 
     /**
-     * @var Street[] Коллекция улиц, принадлежащих городу
+     * @var \KMA\IikoApi\Entity\Street[] Коллекция улиц, принадлежащих городу
      */
     public array $streets;
 }

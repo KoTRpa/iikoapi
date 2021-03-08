@@ -28,12 +28,12 @@ class OrderRequest extends Base
     public ?string $deliveryTerminalId = null;
 
     /**
-     * @var Customer Заказчик
+     * @var \KMA\IikoApi\Entity\Customer Заказчик
      */
     public Customer $customer;
 
     /**
-     * @var Order Заказ
+     * @var \KMA\IikoApi\Entity\Order Заказ
      */
     public Order $order;
 

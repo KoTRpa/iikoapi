@@ -27,7 +27,7 @@ class DeliveryOpinion extends Base
     public ?string $comment = null;
 
     /**
-     * @var DeliveryOpinionMark[]|null Оценки клиента
+     * @var \KMA\IikoApi\Entity\DeliveryOpinionMark[]|null Оценки клиента
      */
     public ?array $marks = null;
 

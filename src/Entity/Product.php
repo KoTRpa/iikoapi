@@ -42,7 +42,7 @@ class Product extends Base
     public ?string $parentGroup = null;
 
     /**
-     * @var ImageInfo[]|null Описание картинок
+     * @var \KMA\IikoApi\Entity\ImageInfo[]|null Описание картинок
      */
     public ?array $images = null;
 
@@ -123,12 +123,12 @@ class Product extends Base
     public ?bool $isIncludedInMenu = null;
 
     /**
-     * @var Modifier[]|null Одиночные модификаторы
+     * @var \KMA\IikoApi\Entity\Modifier[]|null Одиночные модификаторы
      */
     public ?array $modifiers = null;
 
     /**
-     * @var Modifier[]|null Групповые модификаторы
+     * @var \KMA\IikoApi\Entity\Modifier[]|null Групповые модификаторы
      */
     public ?array $groupModifiers = null;
 
@@ -178,7 +178,7 @@ class Product extends Base
     public ?array $prohibitedToSaleOn = null;
 
     /**
-     * @var CustomTerminalPriceInfo[]|null Список терминалов, на которых цена продукта отличается от стандартной и цен на них.
+     * @var \KMA\IikoApi\Entity\CustomTerminalPriceInfo[]|null Список терминалов, на которых цена продукта отличается от стандартной и цен на них.
      */
     public ?array $differentPricesOn = null;
 

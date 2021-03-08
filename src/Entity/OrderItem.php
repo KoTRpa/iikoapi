@@ -50,7 +50,7 @@ class OrderItem extends Base
     public ?string $category = null;
 
     /**
-     * @var OrderItemModifier[]|null Модификаторы
+     * @var \KMA\IikoApi\Entity\OrderItemModifier[]|null Модификаторы
      */
     public ?array $modifiers = null;
 

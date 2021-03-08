@@ -59,7 +59,7 @@ class Customer extends Base
      */
     public ?string $favouriteDish = null;
 
-    /** @var ShortDateTime|null День рождения */
+    /** @var \KMA\IikoApi\Entity\Type\ShortDateTime|null День рождения */
     public ?ShortDateTime $birthday = null;
 
     /**

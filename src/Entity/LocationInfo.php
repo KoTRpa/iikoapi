@@ -28,7 +28,7 @@ class LocationInfo extends Base
     public int $accuracy;
 
     /**
-     * @var DateTime Дата измерения местоположения курьера
+     * @var \KMA\IikoApi\Entity\Type\DateTime Дата измерения местоположения курьера
      */
     public DateTime $date;
 }

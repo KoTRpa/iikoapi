@@ -47,15 +47,13 @@ class Order extends Base
     public string $date;
 
     /**
-     * @var array Элементы заказа
-     * OrderItem[]
-     *
+     * @var \KMA\IikoApi\Entity\OrderItem[] Элементы заказа
      * - required
      */
     public array $items;
 
     /**
-     * @var PaymentItem[]|null Элементы оплаты заказа
+     * @var \KMA\IikoApi\Entity\PaymentItem[]|null Элементы оплаты заказа
      */
     public ?array $paymentItems = null;
 
@@ -86,7 +84,7 @@ class Order extends Base
     public ?string $orderTypeId = null;
 
     /**
-     * @var Address|null Адрес доставки заказа
+     * @var \KMA\IikoApi\Entity\Address|null Адрес доставки заказа
      */
     public ?Address $address = null;
 

@@ -24,7 +24,7 @@ class OrderCourierInfo extends Base
     public string $courierId;
 
     /**
-     * @var LocationInfo|null Информация о положении курьера
+     * @var \KMA\IikoApi\Entity\LocationInfo|null Информация о положении курьера
      * TODO: по доке поле обязательное, а приходить может и null
      */
     public ?LocationInfo $location = null;

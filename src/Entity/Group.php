@@ -42,7 +42,7 @@ class Group extends Base
     public ?string $parentGroup = null;
 
     /**
-     * @var ImageInfo[]|null URLs картинок
+     * @var \KMA\IikoApi\Entity\ImageInfo[]|null URLs картинок
      */
     public ?array $images = null;
 
