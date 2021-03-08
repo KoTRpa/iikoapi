@@ -3,6 +3,8 @@
 
 namespace KMA\IikoApi\Entity;
 
+use KMA\IikoApi\Entity\Concerns\Hashable;
+
 /**
  * Доставочный терминал
  * @package KMA\IikoApi\Entity
@@ -10,6 +12,12 @@ namespace KMA\IikoApi\Entity;
  */
 class DeliveryTerminalInfo extends Base
 {
+    use Hashable;
+
+    protected array $hashFields = [
+        'deliveryTerminalId',
+    ];
+
     /**
      * @var string GUID Идентификатор доставочного терминала
      */

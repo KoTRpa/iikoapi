@@ -2,8 +2,19 @@
 
 namespace KMA\IikoApi\Entity;
 
+use KMA\IikoApi\Entity\Concerns\Hashable;
+
 class OrderItem extends Base
 {
+    use Hashable;
+
+    protected array $hashFields = [
+        'id',
+        'amount',
+        'sum',
+        'modifiers',
+    ];
+
     /**
      * @var string|null Guid Идентификатор продукта
      */
@@ -39,8 +50,7 @@ class OrderItem extends Base
     public ?string $category = null;
 
     /**
-     * @var array|null Модификаторы
-     * OrderItemModifier[]
+     * @var OrderItemModifier[]|null Модификаторы
      */
     public ?array $modifiers = null;
 

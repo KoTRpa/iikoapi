@@ -2,8 +2,18 @@
 
 namespace KMA\IikoApi\Entity;
 
+use KMA\IikoApi\Entity\Concerns\Hashable;
+
 class PaymentItem extends Base
 {
+    use Hashable;
+
+    protected array $hashFields = [
+        'isExternal',
+        'isProcessedExternally',
+        'sum',
+    ];
+
     /**
      * @var float Сумма к оплате
      *  - required

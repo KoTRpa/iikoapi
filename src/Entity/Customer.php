@@ -2,6 +2,7 @@
 
 namespace KMA\IikoApi\Entity;
 
+use KMA\IikoApi\Entity\Concerns\Hashable;
 use KMA\IikoApi\Entity\Type\ShortDateTime;
 
 /**
@@ -15,6 +16,13 @@ use KMA\IikoApi\Entity\Type\ShortDateTime;
  */
 class Customer extends Base
 {
+    use Hashable;
+
+    protected array $hashFields = [
+        'id',
+        'phone',
+        'name',
+    ];
     /**
      * @var string|null Идентификатор
      * Guid

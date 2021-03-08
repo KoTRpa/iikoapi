@@ -4,8 +4,18 @@
 namespace KMA\IikoApi\Entity;
 
 
+use KMA\IikoApi\Entity\Concerns\Hashable;
+
 class OrderItemModifier extends Base
 {
+    use Hashable;
+
+    protected array $hashFields = [
+        'id',
+        'name',
+        'amount',
+    ];
+
     /**
      * @var string Guid Идентификатор продукта
      *  - required

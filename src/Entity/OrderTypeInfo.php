@@ -3,6 +3,8 @@
 
 namespace KMA\IikoApi\Entity;
 
+use KMA\IikoApi\Entity\Concerns\Hashable;
+
 /**
  * Тип заказа
  * @package KMA\IikoApi\Entity
@@ -11,6 +13,12 @@ namespace KMA\IikoApi\Entity;
  */
 class OrderTypeInfo extends Base
 {
+    use Hashable;
+
+    protected array $hashFields = [
+        'id',
+    ];
+
     /**
      * @var string GUID Идентификатор типа заказа
      */

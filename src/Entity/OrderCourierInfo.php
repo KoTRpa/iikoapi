@@ -3,6 +3,8 @@
 
 namespace KMA\IikoApi\Entity;
 
+use KMA\IikoApi\Entity\Concerns\Hashable;
+
 /**
  * Class OrderCourierInfo Информация о курьере заказа
  * @package KMA\IikoApi\Entity
@@ -10,6 +12,12 @@ namespace KMA\IikoApi\Entity;
  */
 class OrderCourierInfo extends Base
 {
+    use Hashable;
+
+    protected array $hashFields = [
+        'courierId',
+    ];
+
     /**
      * @var string GUID Идентификатор курьера
      */
