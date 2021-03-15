@@ -117,7 +117,7 @@ class IikoResponseException extends IikoApiException
      */
     protected function getResponseErrorCode(): int
     {
-        return $this->src['code'] ?? -1;
+        return $this->responseData['code'] ?? -1;
     }
 
     /**
