@@ -150,6 +150,16 @@ class ApiTest extends TestCase
         );
     }
 
+    public function testMissingOrder()
+    {
+        $orderId = '11111111-1111-1111-1111-111111111111';
+        $order = $this->iiko->orderInfo(
+            $this->orgId,
+            $orderId
+        );
+        $this->assertNull($order);
+    }
+
     public function testOrderWrongIdFormat()
     {
         $this->expectException(OrderInfoException::class);

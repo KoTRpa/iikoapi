@@ -12,6 +12,7 @@ use KMA\IikoApi\Entity\Request\SetOrderDeliveredRequest;
 use KMA\IikoApi\Entity\Type\TimeSpan;
 use KMA\IikoApi\Exceptions\IikoApiException;
 
+use KMA\IikoApi\Exceptions\IikoResponseException;
 use KMA\IikoApi\Exceptions\OrderInfoException;
 use KMA\IikoApi\Iiko;
 use KMA\IikoApi\Traits\Http;
@@ -148,12 +149,12 @@ trait Order
      * @param string $organization
      * @param string $orderId
      * @param TimeSpan|null $requestTimeout
-     * @return OrderInfo
+     * @return OrderInfo|null
      * @throws OrderInfoException
      * @throws \JsonMapper_Exception
      * @throws \Exception
      */
-    public function orderInfo(string $organization, string $orderId, ?TimeSpan $requestTimeout = null): OrderInfo
+    public function orderInfo(string $organization, string $orderId, ?TimeSpan $requestTimeout = null): ?OrderInfo
     {
         if (null === $requestTimeout) {
             $requestTimeout = new TimeSpan(0, 0, 30);
@@ -171,6 +172,12 @@ trait Order
         try {
             $response = $this->get($endpoint, $query);
             $json = \GuzzleHttp\json_decode($response->getBody(), false);
+        } catch (IikoResponseException $e) {
+            // not found order (probably: docs for error responses is missing)
+            if ($e->getCode() === 110) {
+                return null;
+            }
+            throw $e;
         } catch (IikoApiException $e) {
             throw new OrderInfoException($e->getMessage(), $e->getCode(), $e);
         } catch (\Exception $e) {
