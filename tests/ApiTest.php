@@ -150,6 +150,25 @@ class ApiTest extends TestCase
         );
     }
 
+
+
+    public function testOrderTypes()
+    {
+        $items = $this->iiko->getOrderTypes($this->orgId);
+
+        $this->assertInstanceOf(
+            \KMA\IikoApi\Entity\OrderTypesResponse::class,
+            $items
+        );
+
+        foreach ($items->items as $item) {
+            $this->assertInstanceOf(
+                \KMA\IikoApi\Entity\OrderTypeInfo::class,
+                $item
+            );
+        }
+    }
+
     public function testMissingOrder()
     {
         $orderId = '11111111-1111-1111-1111-111111111111';

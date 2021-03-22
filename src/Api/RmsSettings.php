@@ -5,6 +5,7 @@ namespace KMA\IikoApi\Api;
 
 use KMA\IikoApi\Entity\OrganizationUser;
 use KMA\IikoApi\Entity\PaymentType;
+use KMA\IikoApi\Entity\OrderTypesResponse;
 use KMA\IikoApi\Exceptions\IikoApiException;
 
 use KMA\IikoApi\Iiko;
@@ -87,6 +88,33 @@ trait RmsSettings
 
         return (new JsonMapper())->mapArray(
             $json->paymentTypes, [], PaymentType::class
+        );
+    }
+
+    /**
+     * Получение списка допустимых типов заказов
+     * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.v0yylr6spp7l
+     *
+     * @param string $organization
+     * @return \KMA\IikoApi\Entity\OrderTypesResponse
+     * @throws IikoApiException
+     * @throws \JsonMapper_Exception
+     */
+    public function getOrderTypes(string $organization): OrderTypesResponse
+    {
+        $endpoint = '/rmsSettings/getOrderTypes';
+
+        $params = [
+            'access_token' => $this->token(),
+            'organization' => $organization,
+        ];
+
+        $response = $this->get($endpoint, $params);
+
+        $json = \GuzzleHttp\json_decode($response->getBody(), false);
+
+        return (new JsonMapper())->map(
+            $json, new OrderTypesResponse
         );
     }
 }
