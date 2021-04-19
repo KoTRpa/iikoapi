@@ -20,7 +20,7 @@ class OpeningHours extends Base
      */
     public ?string $from = null;
 
-    /** @var ?string Время, до которого работает заведение.
+    /** @var string|null Время, до которого работает заведение.
      * Строка в формате “hh:mm”, где
      * hh - час (от 00 до 23);
      * mm - минута (от 00 до 59);
