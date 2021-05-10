@@ -3,6 +3,7 @@
 
 namespace KMA\IikoApi\Api;
 
+use KMA\IikoApi\Entity\Collections\OrganizationUserCollection;
 use KMA\IikoApi\Entity\OrganizationUser;
 use KMA\IikoApi\Entity\PaymentType;
 use KMA\IikoApi\Entity\OrderTypesResponse;
@@ -41,11 +42,11 @@ trait RmsSettings
      * @see https://docs.google.com/document/d/1pRQNIn46GH1LVqzBUY5TdIIUuSCOl-A_xeCBbogd2bE/edit#heading=h.gt76m85vdm6q
      *
      * @param string $organization iiko organization id
-     * @return OrganizationUser[]
+     * @return OrganizationUserCollection
      * @throws IikoApiException
      * @throws \JsonMapper_Exception
      */
-    public function getCouriers(string $organization): array
+    public function getCouriers(string $organization): OrganizationUserCollection
     {
         $endpoint = '/rmsSettings/getCouriers';
 
@@ -57,6 +58,9 @@ trait RmsSettings
         $response = $this->get($endpoint, $params);
 
         $json = \GuzzleHttp\json_decode($response->getBody(), false);
+
+        return new OrganizationUserCollection($json->users);
+
 
         return (new JsonMapper())->mapArray(
             $json->users, [], OrganizationUser::class
