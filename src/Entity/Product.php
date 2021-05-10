@@ -173,7 +173,7 @@ class Product extends Base
     public ?string $seoTitle = null;
 
     /**
-     * @var array|null Guid[] Список ID терминалов, на которых продукт запрещен к продаже
+     * @var string[]|null Guid[] Список ID терминалов, на которых продукт запрещен к продаже
      */
     public ?array $prohibitedToSaleOn = null;
 
