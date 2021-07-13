@@ -342,4 +342,12 @@ class ApiTest extends TestCase
     //
     //     $this->assertTrue(true);
     // }
+
+    public function testGetDeliveryRestrictions(): void
+    {
+        $this->assertInstanceOf(
+            \KMA\IikoApi\Entity\DeliveryRestrictions::class,
+            $this->iiko->getDeliveryRestrictions($this->orgId)
+        );
+    }
 }
