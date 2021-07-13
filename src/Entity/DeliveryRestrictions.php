@@ -42,7 +42,7 @@ class DeliveryRestrictions extends Base
     public bool $useSameRestrictionsOnAllWeek;
 
     /** @var \KMA\IikoApi\Entity\DeliveryRestrictionItem[]|null Привязки ресторанов к зонам доставки */
-    public ?array $DeliveryRestrictionItem = null;
+    public ?array $restrictions = null;
 
     /** @var \KMA\IikoApi\Entity\DeliveryZone[]|null Список доставочных зон из Яндекс.Карт */
     public ?array $deliveryZones = null;
