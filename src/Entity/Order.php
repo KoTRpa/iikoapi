@@ -27,7 +27,7 @@ class Order extends Base
     public ?string $externalId = null;
 
     /**
-     * @var string Дата выполнения заказа
+     * @var string|null Дата выполнения заказа
      * если задан null,
      * то система подставит время как текущее + продолжительность доставки
      * из “График работы и картография”
@@ -44,7 +44,7 @@ class Order extends Base
      * mm - минута (от 00 до 59);
      * ss - секунда (от 00 до 59).
      */
-    public string $date;
+    public ?string $date;
 
     /**
      * @var \KMA\IikoApi\Entity\OrderItem[] Элементы заказа
